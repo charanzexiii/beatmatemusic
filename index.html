@@ -1064,6 +1064,7 @@ audio::-webkit-media-controls-volume-slider {
         }
 
         function stopOtherSongs(selectedAudio) {
+            // Stop every other audio element.
             document.querySelectorAll('.song audio').forEach(audio => {
                 if (audio !== selectedAudio) {
                     audio.pause();
@@ -1071,8 +1072,10 @@ audio::-webkit-media-controls-volume-slider {
                 }
             });
 
+            // Reset ALL song buttons so the previous song cannot
+            // keep showing the pause symbol.
             document.querySelectorAll('.play-btn').forEach(btn => {
-                if (btn !== currentPlayButton) btn.innerHTML = '▶';
+                btn.innerHTML = '▶';
             });
         }
 
@@ -1159,6 +1162,11 @@ audio::-webkit-media-controls-volume-slider {
                 });
 
                 const container = audio.closest('.song');
+
+                // Always reset every song button first.
+                document.querySelectorAll('.play-btn').forEach(btn => {
+                    btn.innerHTML = '▶';
+                });
 
                 if (currentSongContainer !== container) {
                     currentSongContainer = container;
