@@ -793,7 +793,25 @@ audio::-webkit-media-controls-volume-slider {
                 flex: 0 0 10px;
             }
         }
-    </style>
+    
+/* Bigger Previous / Next buttons with more space around Play */
+#prevBtn,#nextBtn{
+  width:52px!important;height:52px!important;
+  min-width:52px!important;min-height:52px!important;
+  font-size:25px!important;border-radius:50%!important;
+}
+#prevBtn{margin-right:20px!important;}
+#nextBtn{margin-left:20px!important;}
+#npPlayPause{
+  width:58px!important;height:58px!important;
+  min-width:58px!important;min-height:58px!important;
+  font-size:24px!important;border-radius:50%!important;
+}
+#prevBtn:focus,#nextBtn:focus,#npPlayPause:focus{
+  outline:none!important;box-shadow:none!important;
+}
+
+</style>
 </head>
 <body>
 
