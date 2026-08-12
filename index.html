@@ -811,6 +811,29 @@ audio::-webkit-media-controls-volume-slider {
   outline:none!important;box-shadow:none!important;
 }
 
+
+/* Mobile-friendly final bottom player sizing */
+#prevBtn,#nextBtn{
+ width:46px!important;height:46px!important;min-width:46px!important;min-height:46px!important;
+ font-size:21px!important;margin-left:8px!important;margin-right:8px!important;
+}
+#npPlayPause{
+ width:48px!important;height:48px!important;min-width:48px!important;min-height:48px!important;
+ font-size:20px!important;margin-left:4px!important;margin-right:4px!important;
+}
+@media(max-width:600px){
+ #nowPlayingBar{padding:8px 10px!important;gap:5px!important;}
+ #prevBtn,#nextBtn{
+  width:42px!important;height:42px!important;min-width:42px!important;min-height:42px!important;
+  font-size:19px!important;margin-left:4px!important;margin-right:4px!important;
+ }
+ #npPlayPause{
+  width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;
+  font-size:19px!important;margin-left:2px!important;margin-right:2px!important;
+ }
+ #npProgress{min-width:55px!important;}
+}
+
 </style>
 </head>
 <body>
