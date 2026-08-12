@@ -70,7 +70,7 @@
         .subcategory h3 { font-size:21px; margin-bottom:18px; }
         .subcategory h3 span { color:#ff1744; }
 
-        /* MUSIC LIST GRID */
+        /* MUSIC LIST – exact original structure but in a grid */
         .music-list {
             width:90%; max-width:1200px; margin:30px auto;
             display:grid;
@@ -78,11 +78,12 @@
             gap:25px;
         }
 
-        /* SONG CARD */
+        /* SONG CARD – preserve original .song layout */
         .song {
+            display:flex; flex-direction:column;
             background:#15151c; padding:20px; border-radius:15px;
             border:1px solid transparent; transition:0.3s;
-            display:flex; flex-direction:column; gap:12px;
+            gap:12px;
         }
         .song:hover {
             transform:translateY(-5px);
@@ -94,8 +95,11 @@
             border-radius:12px; transition:0.3s;
         }
         .song:hover img { transform:scale(1.02); }
+
+        .song-info { flex:1; }
         .song-info h3 { font-size:20px; margin-bottom:6px; }
         .song-info p { color:#aaa; font-size:14px; }
+
         .play-btn {
             width:55px; height:55px; border-radius:50%; border:none;
             background:#ff1744; color:white; font-size:22px;
@@ -156,9 +160,7 @@
         .pagination-container button:disabled {
             opacity:0.4; pointer-events:none;
         }
-        .page-info {
-            color:#aaa; font-size:15px; margin:0 10px;
-        }
+        .page-info { color:#aaa; font-size:15px; margin:0 10px; }
 
         .no-results { display:none; text-align:center; color:#888; padding:40px; font-size:18px; }
 
@@ -319,18 +321,16 @@
     const paginationContainer = document.getElementById('paginationContainer');
     const noResultsEl = document.getElementById('noResults');
 
-    // ----- RENDER -----
+    // ----- RENDER (preserves original song structure) -----
     function render() {
         const start = (currentPage - 1) * perPage;
         const end = start + perPage;
         const pageItems = filteredSongs.slice(start, end);
         const totalPages = Math.ceil(filteredSongs.length / perPage) || 1;
 
-        // clear
         musicListEl.innerHTML = '';
         paginationContainer.innerHTML = '';
 
-        // no results
         if (filteredSongs.length === 0) {
             noResultsEl.style.display = 'block';
             return;
@@ -338,13 +338,12 @@
             noResultsEl.style.display = 'none';
         }
 
-        // build song cards
+        // build each song card using the exact original structure
         pageItems.forEach((song, idx) => {
-            const card = document.createElement('div');
-            card.className = 'song';
-            card.dataset.lang = song.lang;
-            card.dataset.type = song.type;
-            card.dataset.id = song.id;
+            const div = document.createElement('div');
+            div.className = 'song';
+            div.dataset.lang = song.lang;
+            div.dataset.type = song.type;
 
             // image
             const img = document.createElement('img');
@@ -352,48 +351,47 @@
             img.alt = song.title;
 
             // info
-            const infoDiv = document.createElement('div');
-            infoDiv.className = 'song-info';
+            const info = document.createElement('div');
+            info.className = 'song-info';
             const h3 = document.createElement('h3');
             h3.textContent = song.title;
             const p = document.createElement('p');
             p.textContent = song.artist;
-            infoDiv.appendChild(h3);
-            infoDiv.appendChild(p);
+            info.appendChild(h3);
+            info.appendChild(p);
 
             // play button
             const playBtn = document.createElement('button');
             playBtn.className = 'play-btn';
             playBtn.textContent = '▶';
-            // generate unique audio id
             const audioId = 'audio_' + song.id + '_' + Date.now() + '_' + idx;
             playBtn.onclick = function(e) {
                 e.stopPropagation();
                 playSong(audioId, this);
             };
 
-            // audio controls
-            const controlsDiv = document.createElement('div');
-            controlsDiv.className = 'audio-controls';
+            // audio controls (hidden initially)
+            const controls = document.createElement('div');
+            controls.className = 'audio-controls';
             const audioEl = document.createElement('audio');
             audioEl.id = audioId;
             audioEl.src = song.src;
             audioEl.controls = true;
-            controlsDiv.appendChild(audioEl);
+            controls.appendChild(audioEl);
 
-            const downloadLink = document.createElement('a');
-            downloadLink.href = song.src;
-            downloadLink.download = song.title + '.mp3';
-            downloadLink.className = 'download-btn';
-            downloadLink.textContent = '⬇ Download Song';
-            controlsDiv.appendChild(downloadLink);
+            const download = document.createElement('a');
+            download.href = song.src;
+            download.download = song.title + '.mp3';
+            download.className = 'download-btn';
+            download.textContent = '⬇ Download Song';
+            controls.appendChild(download);
 
-            // append all
-            card.appendChild(img);
-            card.appendChild(infoDiv);
-            card.appendChild(playBtn);
-            card.appendChild(controlsDiv);
-            musicListEl.appendChild(card);
+            // assemble
+            div.appendChild(img);
+            div.appendChild(info);
+            div.appendChild(playBtn);
+            div.appendChild(controls);
+            musicListEl.appendChild(div);
 
             // audio ended event
             audioEl.addEventListener('ended', function() {
@@ -404,11 +402,9 @@
 
         // ---- PAGINATION ----
         let pagesHtml = '';
-        // Prev
         const prevDisabled = currentPage === 1;
         pagesHtml += `<button onclick="goToPage(${currentPage-1})" ${prevDisabled ? 'disabled' : ''}>‹ Prev</button>`;
 
-        // Page numbers (show window of 5)
         let startPage = Math.max(1, currentPage - 2);
         let endPage = Math.min(totalPages, startPage + 4);
         if (endPage - startPage < 4) {
@@ -440,7 +436,6 @@
         if (page < 1 || page > total) return;
         currentPage = page;
         render();
-        // scroll to top of list
         document.querySelector('.music-list')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
@@ -453,7 +448,6 @@
         if (activeType !== 'all') {
             result = result.filter(s => s.type === activeType);
         }
-        // search (if any)
         const searchVal = document.getElementById('songSearch').value.toLowerCase().trim();
         if (searchVal) {
             result = result.filter(s =>
@@ -472,10 +466,9 @@
         document.querySelectorAll('.language-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         activeLang = lang;
-        // reset type button to "All" but keep type active? we set activeType = 'all' and update UI
         activeType = 'all';
         document.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
-        document.querySelector('.sub-btn')?.classList.add('active'); // first is "All"
+        document.querySelector('.sub-btn')?.classList.add('active');
         document.getElementById('songSearch').value = '';
         applyFilters();
     }
@@ -485,7 +478,6 @@
         document.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         activeType = type;
-        // keep language as is, but reset search
         document.getElementById('songSearch').value = '';
         applyFilters();
     }
@@ -500,7 +492,6 @@
 
     // ----- SEARCH -----
     function searchSongs() {
-        // keep language and type filters, just re-apply with search
         applyFilters();
     }
     document.getElementById('songSearch').addEventListener('keydown', function(e) {
@@ -512,7 +503,6 @@
         const selectedAudio = document.getElementById(audioId);
         if (!selectedAudio) return;
 
-        // pause all others
         document.querySelectorAll('audio').forEach(a => {
             if (a !== selectedAudio) {
                 a.pause();
@@ -522,14 +512,12 @@
             }
         });
 
-        // hide other controls
         document.querySelectorAll('.audio-controls').forEach(c => {
             if (c !== selectedAudio.closest('.audio-controls')) {
                 c.classList.remove('show');
             }
         });
 
-        // reset other buttons
         document.querySelectorAll('.play-btn').forEach(b => {
             if (b !== button) b.innerHTML = '▶';
         });
@@ -553,7 +541,6 @@
     }
 
     // ----- INIT -----
-    // set active language "all", type "all"
     activeLang = 'all';
     activeType = 'all';
     applyFilters();
