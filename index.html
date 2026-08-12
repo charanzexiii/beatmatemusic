@@ -5,527 +5,493 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BEATMATE · Music Collection</title>
     <link rel="icon" type="image/png" href="images/icon.png">
-<style>
-
-/* =====================================================
-   GENERAL
-===================================================== */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-body {
-    background: #0b0b0f;
-    color: white;
-}
-
-
-/* =====================================================
-   NAVBAR
-===================================================== */
-
-nav {
-    height: 75px;
-
-    background: #050507;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 0 7%;
-
-    position: sticky;
-    top: 0;
-
-    z-index: 100;
-
-    box-shadow:
-        0 3px 20px
-        rgba(255, 23, 68, 0.20);
-}
-
-
-/* LOGO */
-
-.logo {
-    font-size: 40px;
-
-    font-weight: 900;
-
-    letter-spacing: 3px;
-}
-
-.logo a {
-    color: #ff1744;
-
-    text-decoration: none;
-}
-
-.logo span {
-    color: white;
-}
-
-
-/* NAV LINKS */
-
-.nav-links {
-    display: flex;
-
-    align-items: center;
-
-    gap: 25px;
-}
-
-.nav-links a {
-    color: white;
-
-    text-decoration: none;
-
-    font-size: 16px;
-
-    transition: 0.3s;
-}
-
-.nav-links a:hover {
-    color: #ff1744;
-
-    transform: translateY(-2px);
-}
-
-
-/* =====================================================
-   HEADER
-===================================================== */
-
-.music-header {
-    text-align: center;
-
-    padding:
-        65px
-        20px
-        30px;
-}
-
-.music-header h1 {
-    font-size: 48px;
-
-    margin-bottom: 12px;
-}
-
-.music-header h1 span {
-    color: #ff1744;
-}
-
-.music-header p {
-    color: #aaa;
-
-    font-size: 16px;
-}
-
-
-/* =====================================================
-   SEARCH
-===================================================== */
-
-.music-search {
-    display: flex;
-
-    justify-content: center;
-
-    padding: 20px;
-}
-
-.music-search input {
-    width: 70%;
-
-    max-width: 600px;
-
-    padding: 16px 22px;
-
-    border-radius: 35px;
-
-    border: 2px solid #ff1744;
-
-    outline: none;
-
-    background: #15151c;
-
-    color: white;
-
-    font-size: 16px;
-
-    transition: 0.3s;
-}
-
-.search-btn {
-    margin-left: 10px;
-    padding: 15px 25px;
-    border: 2px solid #ff1744;
-    border-radius: 30px;
-    background: #ff1744;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.search-btn:hover {
-    background: #e60032;
-    transform: scale(1.05);
-    box-shadow: 0 5px 20px rgba(255, 23, 68, 0.5);
-}
-
-.music-search input:focus {
-    box-shadow:
-        0 0 25px
-        rgba(255, 23, 68, 0.6);
-}
-
-.music-search input::placeholder {
-    color: #999;
-}
-
-
-/* =====================================================
-   LANGUAGE SECTION
-===================================================== */
-
-.language-section {
-    text-align: center;
-
-    padding:
-        15px
-        20px
-        30px;
-}
-
-.language-title {
-    margin-bottom: 20px;
-
-    font-size: 25px;
-}
-
-.language-title span {
-    color: #ff1744;
-}
-
-
-/* LANGUAGE BUTTONS */
-
-.language-buttons {
-    display: flex;
-
-    justify-content: center;
-
-    gap: 12px;
-
-    flex-wrap: wrap;
-}
-
-.language-btn {
-    padding:
-        12px
-        25px;
-
-    background: #15151c;
-
-    color: white;
-
-    border: 1px solid #444;
-
-    border-radius: 30px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: 0.3s;
-}
-
-.language-btn:hover {
-    background: #ff1744;
-
-    border-color: #ff1744;
-
-    transform:
-        translateY(-4px)
-        scale(1.05);
-
-    box-shadow:
-        0 8px 20px
-        rgba(255, 23, 68, 0.5);
-}
-
-.language-btn.active {
-    background: #ff1744;
-
-    border-color: #ff1744;
-
-    box-shadow:
-        0 0 18px
-        rgba(255, 23, 68, 0.5);
-}
-
-
-/* =====================================================
-   SUB CATEGORY
-===================================================== */
-
-.subcategory {
-    margin-top: 35px;
-}
-
-.subcategory h3 {
-    font-size: 21px;
-
-    margin-bottom: 18px;
-}
-
-.subcategory h3 span {
-    color: #ff1744;
-}
-
-
-/* SUB BUTTONS */
-
-.subcategory-buttons {
-    display: flex;
-
-    justify-content: center;
-
-    gap: 15px;
-
-    flex-wrap: wrap;
-}
-
-.sub-btn {
-    padding:
-        12px
-        28px;
-
-    background: #15151c;
-
-    color: white;
-
-    border: 1px solid #444;
-
-    border-radius: 30px;
-
-    font-size: 15px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    transition: 0.3s;
-}
-
-.sub-btn:hover {
-    background: #ff1744;
-
-    border-color: #ff1744;
-
-    transform:
-        translateY(-4px)
-        scale(1.05);
-
-    box-shadow:
-        0 8px 20px
-        rgba(255, 23, 68, 0.5);
-}
-
-.sub-btn.active {
-    background: #ff1744;
-
-    border-color: #ff1744;
-
-    box-shadow:
-        0 0 18px
-        rgba(255, 23, 68, 0.5);
-}
-
-
-/* =====================================================
-   MUSIC LIST
-===================================================== */
-
-.music-list {
-    width: 90%;
-
-    max-width: 1000px;
-
-    margin:
-        30px
-        auto;
-}
-
-
-/* =====================================================
-   SONG CARD
-===================================================== */
-
-.song {
-    display: flex;
-
-    align-items: center;
-
-    gap: 20px;
-
-    background: #15151c;
-
-    padding: 20px;
-
-    margin-bottom: 20px;
-
-    border-radius: 15px;
-
-    border: 1px solid transparent;
-
-    transition: 0.3s;
-
-    flex-wrap: wrap;
-}
-
-.song:hover {
-    transform: translateY(-5px);
-
-    border-color: #ff1744;
-
-    box-shadow:
-        0 8px 30px
-        rgba(255, 23, 68, 0.25);
-}
-
-
-/* =====================================================
-   SONG IMAGE
-===================================================== */
-
-.song img {
-    width: 100px;
-
-    height: 100px;
-
-    object-fit: cover;
-
-    border-radius: 12px;
-
-    transition: 0.3s;
-}
-
-.song:hover img {
-    transform: scale(1.05);
-}
-
-
-/* =====================================================
-   SONG INFORMATION
-===================================================== */
-
-.song-info {
-    flex: 1;
-
-    min-width: 180px;
-}
-
-.song-info h3 {
-    font-size: 20px;
-
-    margin-bottom: 8px;
-}
-
-.song-info p {
-    color: #aaa;
-
-    font-size: 14px;
-}
-
-
-/* =====================================================
-   PLAY BUTTON
-===================================================== */
-
-.play-btn {
-    width: 55px;
-
-    height: 55px;
-
-    border-radius: 50%;
-
-    border: none;
-
-    background: #ff1744;
-
-    color: white;
-
-    font-size: 22px;
-
-    cursor: pointer;
-
-    transition: 0.3s;
-}
-
-.play-btn:hover {
-    transform: scale(1.15);
-
-    box-shadow:
-        0 0 25px
-        rgba(255, 23, 68, 0.7);
-}
-
-
-/* =====================================================
-   AUDIO CONTROLS
-===================================================== */
-
-.audio-controls {
-    display: none;
-
-    width: 100%;
-
-    text-align: center;
-
-    padding-top: 15px;
-}
-
-.audio-controls.show {
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    gap: 12px;
-}
-
-
-/* =====================================================
-   CUSTOM AUDIO CONTROLS
-===================================================== */
-
-/* Main audio player */
-audio {
-    width: 80%;
-    max-width: 700px;
-    height: 52px;
-
-    background: #101016;
-    border: 1px solid #333;
-    border-radius: 30px;
-
-    accent-color: white;
-
-    filter: drop-shadow(0 4px 15px rgba(255, 23, 68, 0.18));
-}
-
-/* Chrome / Edge audio player */
-audio::-webkit-media-controls-panel {
+    <style>
+        /* ============================================================
+           RESET & BASE
+        ============================================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        body {
+            background: #0b0b0f;
+            color: #fff;
+            padding-bottom: 80px;
+        }
+
+        /* ============================================================
+           NAVBAR
+        ============================================================ */
+        nav {
+            height: 70px;
+            background: #050507;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 7%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 3px 20px rgba(255, 23, 68, 0.20);
+        }
+        .logo {
+            font-size: 36px;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+        .logo a {
+            color: #ff1744;
+            text-decoration: none;
+        }
+        .logo span {
+            color: #fff;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+        .nav-links a:hover {
+            color: #ff1744;
+            transform: translateY(-2px);
+        }
+
+        /* ============================================================
+           HEADER
+        ============================================================ */
+        .music-header {
+            text-align: center;
+            padding: 50px 20px 25px;
+        }
+        .music-header h1 {
+            font-size: 44px;
+            margin-bottom: 10px;
+        }
+        .music-header h1 span {
+            color: #ff1744;
+        }
+        .music-header p {
+            color: #aaa;
+            font-size: 15px;
+        }
+
+        /* ============================================================
+           SEARCH
+        ============================================================ */
+        .music-search {
+            display: flex;
+            justify-content: center;
+            padding: 15px 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .music-search input {
+            width: 70%;
+            max-width: 550px;
+            padding: 14px 20px;
+            border-radius: 35px;
+            border: 2px solid #ff1744;
+            outline: none;
+            background: #15151c;
+            color: #fff;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+        .music-search input:focus {
+            box-shadow: 0 0 25px rgba(255, 23, 68, 0.5);
+        }
+        .music-search input::placeholder {
+            color: #999;
+        }
+        .search-btn {
+            padding: 14px 24px;
+            border: none;
+            border-radius: 30px;
+            background: #ff1744;
+            color: #fff;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .search-btn:hover {
+            background: #e60032;
+            transform: scale(1.04);
+            box-shadow: 0 5px 20px rgba(255, 23, 68, 0.4);
+        }
+
+        /* ============================================================
+           LANGUAGE & TYPE
+        ============================================================ */
+        .language-section {
+            text-align: center;
+            padding: 10px 20px 25px;
+        }
+        .language-title {
+            font-size: 22px;
+            margin-bottom: 16px;
+        }
+        .language-title span {
+            color: #ff1744;
+        }
+        .language-buttons,
+        .subcategory-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .language-btn,
+        .sub-btn {
+            padding: 10px 22px;
+            background: #15151c;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .language-btn:hover,
+        .sub-btn:hover {
+            background: #ff1744;
+            border-color: #ff1744;
+            transform: translateY(-3px) scale(1.04);
+            box-shadow: 0 6px 18px rgba(255, 23, 68, 0.4);
+        }
+        .language-btn.active,
+        .sub-btn.active {
+            background: #ff1744;
+            border-color: #ff1744;
+            box-shadow: 0 0 15px rgba(255, 23, 68, 0.4);
+        }
+        .subcategory {
+            margin-top: 28px;
+        }
+        .subcategory h3 {
+            font-size: 19px;
+            margin-bottom: 14px;
+        }
+        .subcategory h3 span {
+            color: #ff1744;
+        }
+
+        /* ============================================================
+           MUSIC LIST
+        ============================================================ */
+        .music-list {
+            width: 92%;
+            max-width: 960px;
+            margin: 25px auto;
+        }
+
+        /* ============================================================
+           SONG CARD
+        ============================================================ */
+        .song {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: #15151c;
+            padding: 16px 20px;
+            margin-bottom: 16px;
+            border-radius: 14px;
+            border: 1px solid transparent;
+            transition: 0.3s;
+            flex-wrap: wrap;
+        }
+        .song:hover {
+            transform: translateY(-4px);
+            border-color: #ff1744;
+            box-shadow: 0 8px 25px rgba(255, 23, 68, 0.2);
+        }
+        .song img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+        .song:hover img {
+            transform: scale(1.04);
+        }
+        .song-info {
+            flex: 1;
+            min-width: 150px;
+        }
+        .song-info h3 {
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+        .song-info p {
+            color: #aaa;
+            font-size: 13px;
+        }
+        .play-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: none;
+            background: #ff1744;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        
+        }
+        .play-btn:hover {
+            transform: scale(1.12);
+            box-shadow: 0 0 20px rgba(255, 23, 68, 0.6);
+        }
+        .audio-controls {
+            display: none;
+            width: 100%;
+            text-align: center;
+            padding-top: 12px;
+        }
+        .audio-controls.show {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        audio {
+            width: 80%;
+            max-width: 650px;
+            height: 48px;
+            background: #101016;
+            border: 1px solid #333;
+            border-radius: 30px;
+            accent-color: #964343;
+        }
+        .download-btn {
+            display: inline-block;
+            padding: 8px 22px;
+            background: #ff1744;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        .download-btn:hover {
+            background: #e60032;
+            transform: scale(1.04);
+            box-shadow: 0 5px 18px rgba(255, 23, 68, 0.4);
+        }
+        .no-results {
+            display: none;
+            text-align: center;
+            color: #888;
+            padding: 35px;
+            font-size: 17px;
+        }
+        .back {
+            display: block;
+            width: 190px;
+            text-align: center;
+            margin: 40px auto;
+            padding: 12px;
+            background: #ff1744;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .back:hover {
+            background: #e60032;
+            transform: scale(1.04);
+            box-shadow: 0 6px 18px rgba(255, 23, 68, 0.4);
+        }
+        footer {
+            margin-top: 40px;
+            padding: 30px;
+            text-align: center;
+            background: #050507;
+            color: #777;
+            font-size: 14px;
+        }
+        footer strong {
+            color: #ff1744;
+        }
+
+        /* ============================================================
+           PAGINATION
+        ============================================================ */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 25px auto 15px;
+        }
+        .pagination button {
+            background: #15151c;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 30px;
+            padding: 8px 16px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .pagination button:hover:not(:disabled) {
+            background: #ff1744;
+            border-color: #ff1744;
+            transform: scale(1.04);
+            box-shadow: 0 4px 14px rgba(255, 23, 68, 0.35);
+        }
+        .pagination button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .pagination .page-indicator {
+            color: #aaa;
+            font-size: 14px;
+            padding: 0 10px;
+        }
+        .pagination .page-indicator span {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* ============================================================
+           CONTACT (minimal)
+        ============================================================ */
+        .contact-section {
+            display: none;
+            min-height: 60vh;
+            padding: 60px 20px;
+            justify-content: center;
+            align-items: center;
+        }
+        body.contact-open .contact-section {
+            display: flex;
+        }
+        body.contact-open .music-header,
+        body.contact-open .music-search,
+        body.contact-open .language-section,
+        body.contact-open .music-list,
+        body.contact-open .back {
+            display: none;
+        }
+        .contact-card {
+            width: 90%;
+            max-width: 540px;
+            padding: 35px 25px;
+            text-align: center;
+            background: #15151c;
+            border: 1px solid #333;
+            border-radius: 22px;
+            box-shadow: 0 10px 30px rgba(255, 23, 68, 0.12);
+        }
+        .contact-card h2 {
+            font-size: 28px;
+            margin-bottom: 14px;
+        }
+        .contact-card h2 span {
+            color: #ff1744;
+        }
+        .contact-email {
+            color: #ff1744 !important;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .contact-card p {
+            color: #bbb;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+        .contact-card strong {
+            color: #fff;
+        }
+        .contact-info {
+            margin: 20px auto;
+            padding: 16px;
+            text-align: left;
+            max-width: 360px;
+            background: #0b0b0f;
+            border-radius: 14px;
+            border: 1px solid #333;
+        }
+        .contact-info p {
+            font-size: 13px;
+        }
+        .contact-back {
+            display: inline-block;
+            margin-top: 8px;
+            padding: 12px 24px;
+            background: #ff1744;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .contact-back:hover {
+            background: #e60032;
+            transform: scale(1.04);
+            box-shadow: 0 6px 18px rgba(255, 23, 68, 0.35);
+        }
+
+        /* ============================================================
+           SPOTIFY-STYLE NOW PLAYING BAR
+        ============================================================ */
+        .now-playing-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 72px;
+            background: #18181b;
+            border-top: 1px solid #2a2a2e;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 18px;
+            z-index: 200;
+            box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(6px);
+            background: rgba(24, 24, 27, 0.96);
+        }
+
+        /* Left: song info */
+        .now-playing-bar .left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 0 0 200px;
+            min-width: 150px;
+        }
+        .now-playing-bar .left img {
+            width: 46px;
+            height: 46px;
+            border-radius: 6px;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+        .now-playing-bar .left .info {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+            overflow: hidden;
+        }
+        audio::-webkit-media-controls-panel {
     background: linear-gradient(135deg, #c94646, #f87575);
     border-radius: 30px;
 }
@@ -540,7 +506,7 @@ audio::-webkit-media-controls-play-button:hover {
     transform: scale(1.08);
 }
 
-audio::-webkit-media-controls-timeline {
+        audio::-webkit-media-controls-timeline {
     accent-color: rgb(5, 3, 3);
     background-color: rgb(182, 88, 88);
     border-radius: 50px;
@@ -560,1484 +526,830 @@ audio::-webkit-media-controls-mute-button,
 audio::-webkit-media-controls-volume-slider {
     accent-color: #ff1744;
 }
-
-audio:hover {
-    border-color: #ff1744;
-    box-shadow: 0 0 22px rgba(255, 23, 68, 0.35);
-    transition: 0.3s;
-}
-
-/* Firefox */
-audio {
-    color: #ff1744;
-}
-
-/* Audio control area */
-.audio-controls {
-    display: none;
-    width: 100%;
-    text-align: center;
-    padding-top: 15px;
-}
-
-.audio-controls.show {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
-}
-
-
-/* =====================================================
-   DOWNLOAD BUTTON
-===================================================== */
-
-.download-btn {
-    display: inline-block;
-
-    padding:
-        10px
-        25px;
-
-    background: #ff1744;
-
-    color: white;
-
-    text-decoration: none;
-
-    border-radius: 25px;
-
-    font-weight: bold;
-
-    transition: 0.3s;
-}
-
-.download-btn:hover {
-    background: #e60032;
-
-    transform: scale(1.05);
-
-    box-shadow:
-        0 5px 20px
-        rgba(255, 23, 68, 0.5);
-}
-
-
-/* =====================================================
-   NO RESULTS
-===================================================== */
-
-.no-results {
-    display: none;
-
-    text-align: center;
-
-    color: #888;
-
-    padding: 40px;
-
-    font-size: 18px;
-}
-
-
-/* =====================================================
-   BACK BUTTON
-===================================================== */
-
-.back {
-    display: block;
-
-    width: 210px;
-
-    text-align: center;
-
-    margin:
-        50px
-        auto;
-
-    padding: 13px;
-
-    background: #ff1744;
-
-    color: white;
-
-    text-decoration: none;
-
-    border-radius: 25px;
-
-    transition: 0.3s;
-}
-
-.back:hover {
-    background: #e60032;
-
-    transform: scale(1.05);
-
-    box-shadow:
-        0 8px 20px
-        rgba(255, 23, 68, 0.5);
-}
-
-
-/* =====================================================
-   FOOTER
-===================================================== */
-
-footer {
-    margin-top: 50px;
-
-    padding: 35px;
-
-    text-align: center;
-
-    background: #050507;
-
-    color: #777;
-}
-
-footer strong {
-    color: #ff1744;
-}
-
-
-/* CONTACT US */
-.contact-section{display:none;min-height:65vh;padding:70px 20px;justify-content:center;align-items:center}
-body.contact-open .contact-section{display:flex}
-body.contact-open .music-header,body.contact-open .music-search,body.contact-open .language-section,body.contact-open .music-list,body.contact-open .back{display:none}
-.contact-card{width:90%;max-width:600px;padding:40px 30px;text-align:center;background:#15151c;border:1px solid #333;border-radius:25px;box-shadow:0 10px 35px rgba(255,23,68,.18)}
-.contact-card h2{font-size:32px;margin-bottom:18px}.contact-card h2 span{color:#ff1744}
-.contact-email{color:#ff1744!important;font-size:20px;font-weight:bold;margin-bottom:12px}.contact-card p{color:#bbb;line-height:1.7}.contact-card strong{color:white}
-.contact-info{margin:25px auto;padding:18px;text-align:left;max-width:400px;background:#0b0b0f;border-radius:15px;border:1px solid #333}
-.contact-back{display:inline-block;margin-top:10px;padding:13px 28px;background:#ff1744;color:white;text-decoration:none;border-radius:25px;font-weight:bold;transition:.3s}.contact-back:hover{background:#e60032;transform:scale(1.05);box-shadow:0 8px 20px rgba(255,23,68,.5)}
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media (max-width: 600px) {
-
-    nav {
-        padding: 0 15px;
-
-        height: 70px;
-    }
-
-
-    .logo {
-        font-size: 28px;
-    }
-
-
-    .nav-links {
-        gap: 10px;
-    }
-
-
-    .nav-links a {
-        font-size: 11px;
-    }
-
-
-    .music-header h1 {
-        font-size: 32px;
-    }
-
-
-    .music-search {
-        flex-wrap: wrap;
-        gap: 10px;
-    }
-
-    .music-search input {
-        width: 90%;
-    }
-
-    .search-btn {
-        margin-left: 0;
-        padding: 12px 22px;
-    }
-
-
-    .music-list {
-        width: 94%;
-    }
-
-
-    .song {
-        padding: 15px;
-
-        gap: 12px;
-    }
-
-
-    .song img {
-        width: 75px;
-
-        height: 75px;
-    }
-
-
-    .song-info h3 {
-        font-size: 17px;
-    }
-
-
-    .play-btn {
-        width: 45px;
-
-        height: 45px;
-    }
-
-
-    audio {
-        width: 100%;
-        height: 48px;
-        border-radius: 25px;
-    }
-
-    .audio-controls {
-        padding-top: 10px;
-        gap: 10px;
-    }
-
-}
-
-/* =====================================================
-   PAGINATION
-===================================================== */
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin: 30px auto 20px;
-}
-
-.pagination button {
-    background: #15151c;
-    color: white;
-    border: 1px solid #444;
-    border-radius: 30px;
-    padding: 10px 18px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-    font-size: 15px;
-}
-
-.pagination button:hover:not(:disabled) {
-    background: #ff1744;
-    border-color: #ff1744;
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(255, 23, 68, 0.4);
-}
-
-.pagination button:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-}
-
-.pagination .page-indicator {
-    color: #aaa;
-    font-size: 16px;
-    padding: 0 12px;
-}
-
-.pagination .page-indicator span {
-    color: white;
-    font-weight: bold;
-}
-
-</style>
-
+        .now-playing-bar .left .info .title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .now-playing-bar .left .info .artist {
+            font-size: 11px;
+            color: #a7a7a7;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Center: controls + progress */
+        .now-playing-bar .center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            flex: 1;
+            max-width: 500px;
+            padding: 0 10px;
+        }
+        .now-playing-bar .center .controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+        }
+        .now-playing-bar .center .controls button {
+            background: none;
+            border: none;
+            color: #b3b3b3;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .now-playing-bar .center .controls button:hover {
+            color: #fff;
+            transform: scale(1.08);
+        }
+        .now-playing-bar .center .controls .play-pause {
+            background: #ff1744;
+            color: #fff;
+            font-size: 24px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+        }
+        .now-playing-bar .center .controls .play-pause:hover {
+            background: #e60032;
+            transform: scale(1.08);
+            color: #fff;
+        }
+
+        /* PROGRESS AREA */
+        .now-playing-bar .center .progress-area {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+        }
+        .now-playing-bar .center .progress-area .time {
+            font-size: 11px;
+            color: #a7a7a7;
+            min-width: 32px;
+            font-weight: 400;
+        }
+        .now-playing-bar .center .progress-area input[type="range"] {
+            flex: 1;
+            height: 4px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: #4a4a4e;
+            border-radius: 2px;
+            outline: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .now-playing-bar .center .progress-area input[type="range"]::-webkit-slider-runnable-track {
+            height: 4px;
+            border-radius: 2px;
+            background: #4a4a4e;
+        }
+        .now-playing-bar .center .progress-area input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-top: -4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+            border: 2px solid #ff1744;
+        }
+        .now-playing-bar .center .progress-area input[type="range"]::-moz-range-track {
+            height: 4px;
+            border-radius: 2px;
+            background: #4a4a4e;
+        }
+        .now-playing-bar .center .progress-area input[type="range"]::-moz-range-thumb {
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #ff1744;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+        }
+        .now-playing-bar .center .progress-area input[type="range"]::-webkit-slider-runnable-track {
+            background: linear-gradient(to right, #ff1744 0%, #ff1744 var(--progress, 0%), #4a4a4e var(--progress, 0%), #4a4a4e 100%);
+        }
+
+        .now-playing-bar .right {
+            flex: 0 0 60px;
+        }
+
+        .now-playing-bar audio {
+            display: none;
+        }
+
+        /* ============================================================
+           MOBILE
+        ============================================================ */
+        @media (max-width: 640px) {
+            .now-playing-bar {
+                height: 64px;
+                padding: 0 12px;
+                gap: 4px;
+                flex-wrap: nowrap;
+            }
+            .now-playing-bar .left {
+                flex: 0 0 120px;
+                min-width: 100px;
+                gap: 8px;
+            }
+            .now-playing-bar .left img {
+                width: 36px;
+                height: 36px;
+            }
+            .now-playing-bar .left .info .title {
+                font-size: 12px;
+            }
+            .now-playing-bar .left .info .artist {
+                font-size: 10px;
+            }
+            .now-playing-bar .center .controls {
+                gap: 10px;
+            }
+            .now-playing-bar .center .controls button {
+                width: 28px;
+                height: 28px;
+                font-size: 13px;
+            }
+            .now-playing-bar .center .controls .play-pause {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+            .now-playing-bar .center .progress-area .time {
+                font-size: 10px;
+                min-width: 26px;
+            }
+            .now-playing-bar .right {
+                flex: 0 0 20px;
+            }
+            nav {
+                padding: 0 12px;
+                height: 62px;
+            }
+            .logo {
+                font-size: 26px;
+            }
+            .nav-links {
+                gap: 8px;
+            }
+            .nav-links a {
+                font-size: 11px;
+            }
+            .music-header h1 {
+                font-size: 30px;
+            }
+            .music-search input {
+                width: 90%;
+            }
+            .search-btn {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+            .music-list {
+                width: 96%;
+            }
+            .song {
+                padding: 12px 14px;
+                gap: 10px;
+            }
+            .song img {
+                width: 60px;
+                height: 60px;
+            }
+            .song-info h3 {
+                font-size: 15px;
+            }
+            .play-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 17px;
+            }
+            audio {
+                width: 100%;
+                height: 42px;
+            }
+            body {
+                padding-bottom: 70px;
+            }
+        }
+        @media (max-width: 420px) {
+            .now-playing-bar .left {
+                flex: 0 0 80px;
+                min-width: 70px;
+            }
+            .now-playing-bar .left img {
+                width: 28px;
+                height: 28px;
+            }
+            .now-playing-bar .left .info .title {
+                font-size: 10px;
+            }
+            .now-playing-bar .left .info .artist {
+                font-size: 9px;
+            }
+            .now-playing-bar .center .controls {
+                gap: 6px;
+            }
+            .now-playing-bar .center .controls button {
+                width: 24px;
+                height: 24px;
+                font-size: 11px;
+            }
+            .now-playing-bar .center .controls .play-pause {
+                width: 34px;
+                height: 34px;
+                font-size: 17px;
+            }
+            .now-playing-bar .right {
+                flex: 0 0 10px;
+            }
+        }
+    </style>
 </head>
-
-
 <body>
 
+    <!-- ========== NAVBAR ========== -->
+    <nav>
+        <div class="logo">
+            <a href="index.html">BEAT<span>MATE</span></a>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">🏠 Home</a>
+            <a href="contactus.html" onclick="showContact(event)">📞 Contact</a>
+            <a href="https://www.instagram.com/beatmateofficial?igsh=MTlkcDllaTVjazlhMQ==">📱 Social</a>
+        </div>
+    </nav>
 
-<!-- =====================================================
-     NAVBAR
-===================================================== -->
+    <!-- ========== HEADER ========== -->
+    <section class="music-header">
+        <h1>🎵 <span>Music</span> Collection</h1>
+        <p>Listen to your favourite movie songs</p>
+    </section>
 
-<nav>
-
-
-    <div class="logo">
-
-        <a href="index.html">
-
-            BEAT<span>MATE</span>
-
-        </a>
-
+    <!-- ========== SEARCH ========== -->
+    <div class="music-search">
+        <input type="text" id="songSearch" placeholder="🔍 Search songs...">
+        <button class="search-btn" onclick="searchSongs()">🔍 Search</button>
     </div>
 
+    <!-- ========== LANGUAGE + TYPE ========== -->
+    <section class="language-section">
+        <h2 class="language-title">Browse by <span>Language</span></h2>
+        <div class="language-buttons">
+            <button class="language-btn active" onclick="filterLanguage('all', this)">All</button>
+            <button class="language-btn" onclick="filterLanguage('hindi', this)">Hindi</button>
+            <button class="language-btn" onclick="filterLanguage('telugu', this)">Telugu</button>
+            <button class="language-btn" onclick="filterLanguage('malayalam', this)">Malayalam</button>
+            <button class="language-btn" onclick="filterLanguage('tamil', this)">Tamil</button>
+            <button class="language-btn" onclick="filterLanguage('kannada', this)">Kannada</button>
+        </div>
+        <div class="subcategory">
+            <h3>Browse by <span>Type</span></h3>
+            <div class="subcategory-buttons">
+                <button class="sub-btn active" onclick="showAllTypes(this)">🎶 All</button>
+                <button class="sub-btn" onclick="filterType('romantic', this)">❤️ Romantic</button>
+                <button class="sub-btn" onclick="filterType('melody', this)">🎵 Melody</button>
+                <button class="sub-btn" onclick="filterType('action', this)">🎧 Action</button>
+            </div>
+        </div>
+    </section>
 
-    <div class="nav-links">
-
-        <a href="index.html">
-            🏠 Home
-        </a>
-
-        <a href="contactus.html" onclick="showContact(event)">
-            📞 Contact Us
-        </a>
-
-        <a href="https://www.instagram.com/beatmateofficial?igsh=MTlkcDllaTVjazlhMQ==">
-            📱 Social Media
-        </a>
-
+    <!-- ========== MUSIC LIST ========== -->
+    <div class="music-list" id="musicList">
+        <!-- TELUGU 1 -->
+        <div class="song" data-language="telugu" data-type="melody">
+            <img src="dhima.jpeg" alt="Dheema Song cover">
+            <div class="song-info">
+                <h3>Dheema Song</h3>
+                <p>Telugu • Melody</p>
+            </div>
+            <button class="play-btn" onclick="playSong('song1', this)">▶</button>
+            <div class="audio-controls">
+                <audio id="song1" src="telugu/dheema BEATMATE.mp3" controls></audio>
+                <a href="telugu/dheema BEATMATE.mp3" download class="download-btn">⬇ Download Song</a>
+            </div>
+        </div>
+        <!-- TELUGU 2 -->
+        <div class="song" data-language="telugu" data-type="action">
+            <img src="surii.jpg" alt="Soorede cover">
+            <div class="song-info">
+                <h3>Soorede</h3>
+                <p>Telugu • Action</p>
+            </div>
+            <button class="play-btn" onclick="playSong('song2', this)">▶</button>
+            <div class="audio-controls">
+                <audio id="song2" src="telugu/Soorede BEATMATE.mp3" controls></audio>
+                <a href="telugu/Soorede BEATMATE.mp3" download class="download-btn">⬇ Download Song</a>
+            </div>
+        </div>
+        <!-- TELUGU 3 -->
+        <div class="song" data-language="telugu" data-type="romantic">
+            <img src="Rath.jpeg" alt="Ee Rathale cover">
+            <div class="song-info">
+                <h3>Ee Rathale</h3>
+                <p>Telugu • Romantic</p>
+            </div>
+            <button class="play-btn" onclick="playSong('song7', this)">▶</button>
+            <div class="audio-controls">
+                <audio id="song7" src="telugu/Ee Raathale BEATMATE.mp3" controls></audio>
+                <a href="telugu/Ee Raathale BEATMATE.mp3" download class="download-btn">⬇ Download Song</a>
+            </div>
+        </div>
+        <!-- HINDI -->
+        <div class="song" data-language="hindi" data-type="romantic">
+            <img src="g.jpeg" alt="Gehra Hua cover">
+            <div class="song-info">
+                <h3>Gehra Hua</h3>
+                <p>Hindi • Romantic</p>
+            </div>
+            <button class="play-btn" onclick="playSong('song3', this)">▶</button>
+            <div class="audio-controls">
+                <audio id="song3" src="hindi/Gehra hua BEATMATE.mp3" controls></audio>
+                <a href="hindi/Gehra hua BEATMATE.mp3" download class="download-btn">⬇ Download Song</a>
+            </div>
+        </div>
+        <!-- MALAYALAM -->
+        <div class="song" data-language="malayalam" data-type="romantic">
+            <img src="JJ.jpeg" alt="Minnalva cover">
+            <div class="song-info">
+                <h3>Minnalva</h3>
+                <p>Malayalam • Romantic</p>
+            </div>
+            <button class="play-btn" onclick="playSong('song4', this)">▶</button>
+            <div class="audio-controls">
+                <audio id="song4" src="malayalam/Minnalvala BEATMATE.mp3" controls></audio>
+                <a href="malayalam/Minnalvala BEATMATE.mp3" download class="download-btn">⬇ Download Song</a>
+            </div>
+        </div>
+        <!-- TAMIL -->
+        <div class="song" data-language="tamil" data-type="melody">
+            <img src="Pava.jpeg" alt="Pavazha Malli cover">
+            <div class="song-info">
+                <h3>Pavazha Malli</h3>
+                <p>Tamil • Melody</p>
+            </div>
+            <button class="play-btn" onclick="playSong('song5', this)">▶</button>
+            <div class="audio-controls">
+                <audio id="song5" src="telugu/Pavazha Malli BEATMATE.mp3" controls></audio>
+                <a href="telugu/Pavazha Malli BEATMATE.mp3" download class="download-btn">⬇ Download Song</a>
+            </div>
+        </div>
+        <!-- KANNADA -->
+        <div class="song" data-language="kannada" data-type="romantic">
+            <img src="Meh.jpg" alt="Mehabooba cover">
+            <div class="song-info">
+                <h3>Mehabooba</h3>
+                <p>Kannada • Romantic</p>
+            </div>
+            <button class="play-btn" onclick="playSong('song6', this)">▶</button>
+            <div class="audio-controls">
+                <audio id="song6" src="malayalam/Mehabooba BEATMATE.mp3" controls></audio>
+                <a href="malayalam/Mehabooba BEATMATE.mp3" download class="download-btn">⬇ Download Song</a>
+            </div>
+        </div>
     </div>
 
-</nav>
+    <!-- NO RESULTS -->
+    <div class="no-results" id="noResults">😔 No songs found</div>
 
-
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
-<section class="music-header">
-
-    <h1>
-
-        🎵 <span>Music</span> Collection
-
-    </h1>
-
-
-    <p>
-
-        Listen to your favourite movie songs
-
-    </p>
-
-</section>
-
-
-
-<!-- =====================================================
-     SEARCH
-===================================================== -->
-
-<div class="music-search">
-
-    <input
-        type="text"
-        id="songSearch"
-        placeholder="🔍 Search songs..."
-    >
-
-    <button
-        type="button"
-        class="search-btn"
-        onclick="searchSongs()">
-        🔍 Search
-    </button>
-
-</div>
-
-
-
-<!-- =====================================================
-     LANGUAGE + SUB CATEGORY
-===================================================== -->
-
-<section class="language-section">
-
-
-    <h2 class="language-title">
-
-        Browse by
-        <span>Language</span>
-
-    </h2>
-
-
-    <div class="language-buttons">
-
-
-        <button
-            class="language-btn active"
-            onclick="filterLanguage('all', this)">
-
-            All
-
-        </button>
-
-
-        <button
-            class="language-btn"
-            onclick="filterLanguage('hindi', this)">
-
-             Hindi
-
-        </button>
-
-
-        <button
-            class="language-btn"
-            onclick="filterLanguage('telugu', this)">
-
-             Telugu
-
-        </button>
-
-
-        <button
-            class="language-btn"
-            onclick="filterLanguage('malayalam', this)">
-
-             Malayalam
-
-        </button>
-
-
-        <button
-            class="language-btn"
-            onclick="filterLanguage('tamil', this)">
-
-             Tamil
-
-        </button>
-
-
-        <button
-            class="language-btn"
-            onclick="filterLanguage('kannada', this)">
-
-             Kannada
-
-        </button>
-
+    <!-- PAGINATION -->
+    <div class="pagination" id="paginationControls">
+        <button id="prevPageBtn" onclick="changePage(-1)">◀ Prev</button>
+        <span class="page-indicator">Page <span id="currentPageDisplay">1</span> / <span id="totalPagesDisplay">1</span></span>
+        <button id="nextPageBtn" onclick="changePage(1)">Next ▶</button>
     </div>
 
+    <a href="contactus.html" class="back">< Back to Home</a>
 
+    <!-- CONTACT -->
+    <section class="contact-section" id="contact">
+        <div class="contact-card">
+            <h2>📧 Email <span>Us</span></h2>
+            <p class="contact-email">beatmateofficial@proton.me</p>
+            <p>We respond within <strong>48 hours</strong>.</p>
+            <div class="contact-info">
+                <p><strong>Include:</strong></p>
+                <p>• Your name</p>
+                <p>• Query or suggestion</p>
+                <p>• Music or page link</p>
+            </div>
+            <a href="vs.html" class="contact-back">← Back to Home</a>
+        </div>
+    </section>
 
-    <!-- =================================================
-         SUB CATEGORY
-    ================================================= -->
+    <footer>
+        <p>© 2026 <strong>BEATMATE</strong> · Made with ❤️</p>
+    </footer>
 
-    <div class="subcategory">
-
-
-        <h3>
-
-            Browse by
-            <span>Type</span>
-
-        </h3>
-
-
-        <div class="subcategory-buttons">
-                        <button
-                class="sub-btn active"
-                onclick="showAllTypes(this)">
-
-                🎶 All Songs
-
-            </button>
-
-
-            <button
-                class="sub-btn"
-                onclick="filterType('romantic', this)">
-
-                ❤️ Romantic
-
-            </button>
-
-
-            <button
-                class="sub-btn"
-                onclick="filterType('melody', this)">
-
-                🎵 Melody
-
-            </button>
-            <button
-                class="sub-btn"
-                onclick="filterType('action', this)">
-
-                🎧 Action
-
-            </button>
-
+    <!-- ============================================================
+    SPOTIFY-STYLE NOW PLAYING BAR
+    ============================================================ -->
+    <div class="now-playing-bar" id="nowPlayingBar">
+        <!-- Left: song info -->
+        <div class="left">
+            <img id="npCover" src="" alt="cover">
+            <div class="info">
+                <div class="title" id="npTitle">Song</div>
+                <div class="artist" id="npArtist">Artist</div>
+            </div>
         </div>
 
+        <!-- Center: controls + progress -->
+        <div class="center">
+            <div class="controls">
+                <button id="prevBtn" title="Previous">⏮</button>
+                <button class="play-pause" id="npPlayPause" title="Play/Pause">▶</button>
+                <button id="nextBtn" title="Next">⏭</button>
+            </div>
+            <div class="progress-area">
+                <span class="time" id="npCurrentTime">0:00</span>
+                <input type="range" id="npProgress" min="0" max="100" value="0">
+                <span class="time" id="npDuration">0:00</span>
+            </div>
+        </div>
+
+        <!-- Right: empty spacer -->
+        <div class="right"></div>
+
+        <audio id="npAudio" src=""></audio>
     </div>
 
-</section>
-
-
-
-<!-- =====================================================
-     MUSIC LIST
-===================================================== -->
-
-<div class="music-list" id="musicList">
-
-
-
-<!-- =====================================================
-     TELUGU SONG 1
-===================================================== -->
-
-<div
-    class="song"
-    data-language="telugu"
-    data-type="melody">
-
-    <img src="dhima.jpeg">
-
-
-    <div class="song-info">
-
-        <h3>
-            Dheema Song
-        </h3>
-
-        <p>
-            Telugu • Melody
-        </p>
-
-    </div>
-
-
-    <button
-        class="play-btn"
-        onclick="playSong('song1', this)">
-
-        ▶
-
-    </button>
-
-
-    <div class="audio-controls">
-
-        <audio
-            id="song1"
-            src="telugu/dheema BEATMATE.mp3"
-            controls>
-        </audio>
-
-
-        <a
-            href="telugu/dheema BEATMATE.mp3"
-            download
-            class="download-btn">
-
-            ⬇ Download Song
-
-        </a>
-
-    </div>
-
-</div>
-
-
-
-<!-- =====================================================
-     TELUGU SONG 2
-===================================================== -->
-
-<div
-    class="song"
-    data-language="telugu"
-    data-type="action">
-
-    <img src="surii.jpg">
-
-
-    <div class="song-info">
-
-        <h3>
-            Soorede
-        </h3>
-
-        <p>
-            Telugu • Action
-        </p>
-
-    </div>
-
-
-    <button
-        class="play-btn"
-        onclick="playSong('song2', this)">
-
-        ▶
-
-    </button>
-
-
-    <div class="audio-controls">
-
-        <audio
-            id="song2"
-            src="telugu/Soorede BEATMATE.mp3"
-            controls>
-        </audio>
-              <a
-            href="telugu/Soorede BEATMATE.mp3"
-            download
-            class="download-btn">
-
-            ⬇ Download Song
-
-        </a>
-
-
-        
-
-    </div>
-
-</div>
-    
-    <div
-    class="song"
-    data-language="telugu"
-    data-type="romantic">
-
-    <img src="Rath.jpeg">
-
-
-    <div class="song-info">
-
-        <h3>
-            Ee Rathale
-        </h3>
-
-        <p>
-            Telugu • Romantic 
-        </p>
-
-    </div>
-
-
-    <button
-        class="play-btn"
-        onclick="playSong('song7', this)">
-
-        ▶
-
-    </button>
-
-
-    <div class="audio-controls">
-
-        <audio
-            id="song7"
-            src="telugu/Ee Raathale BEATMATE.mp3"
-            controls>
-        </audio>
-
-
-        <a
-            href="telugu/Ee Raathale BEATMATE.mp3"
-            download
-            class="download-btn">
-
-            ⬇ Download Song
-
-        </a>
-
-    </div>
-
-</div>
-
-
-
-
-<!-- =====================================================
-     HINDI SONG
-===================================================== -->
-
-<div
-    class="song"
-    data-language="hindi"
-    data-type="romantic">
-
-    <img src="g.jpeg">
-
-
-    <div class="song-info">
-
-        <h3>
-            Gehra Hua
-        </h3>
-
-        <p>
-            Hindi • Romantic
-        </p>
-
-    </div>
-
-
-    <button
-        class="play-btn"
-        onclick="playSong('song3', this)">
-
-        ▶
-
-    </button>
-
-
-    <div class="audio-controls">
-
-        <audio
-            id="song3"
-            src="hindi/Gehra hua BEATMATE.mp3"
-            controls>
-        </audio>
-
-
-        <a
-            href="hindi/Gehra hua BEATMATE.mp3"
-            download
-            class="download-btn">
-
-            ⬇ Download Song
-
-        </a>
-
-    </div>
-
-</div>
-
-
-
-<!-- =====================================================
-     MALAYALAM SONG
-===================================================== -->
-
-<div
-    class="song"
-    data-language="malayalam"
-    data-type="romantic">
-
-    <img src="JJ.jpeg">
-
-
-    <div class="song-info">
-
-        <h3>
-            Minnalva 
-        </h3>
-
-        <p>
-            Malayalam • Romantic
-        </p>
-
-    </div>
-
-
-    <button
-        class="play-btn"
-        onclick="playSong('song4', this)">
-
-        ▶
-
-    </button>
-
-
-    <div class="audio-controls">
-
-        <audio
-            id="song4"
-            src="malayalam/Minnalvala BEATMATE.mp3"
-            controls>
-        </audio>
-
-
-        <a
-            href="malayalam/Minnalvala BEATMATE.mp3"
-            download
-            class="download-btn">
-
-            ⬇ Download Song
-
-        </a>
-
-    </div>
-
-</div>
-
-
-
-<!-- =====================================================
-     TAMIL SONG
-===================================================== -->
-
-<div
-    class="song"
-    data-language="tamil"
-    data-type="melody">
-
-    <img src="Pava.jpeg">
-
-
-    <div class="song-info">
-
-        <h3>
-            Pavazha Malli
-        </h3>
-
-        <p>
-            Tamil • Melody
-        </p>
-
-    </div>
-
-
-    <button
-        class="play-btn"
-        onclick="playSong('song5', this)">
-
-        ▶
-
-    </button>
-
-
-    <div class="audio-controls">
-
-        <audio
-            id="song5"
-            src="telugu/Pavazha Malli BEATMATE.mp3"
-            controls>
-        </audio>
-
-
-        <a
-            href="telugu/Pavazha Malli BEATMATE.mp3"
-            download
-            class="download-btn">
-
-            ⬇ Download Song
-
-        </a>
-
-    </div>
-
-</div>
-
-
-
-<!-- =====================================================
-     KANNADA SONG
-===================================================== -->
-
-<div
-    class="song"
-    data-language="kannada"
-    data-type="romantic">
-
-    <img src="Meh.jpg">
-
-
-    <div class="song-info">
-
-        <h3>
-            Mehabooba
-        </h3>
-
-        <p>
-            Kannada • Romantic
-        </p>
-
-    </div>
-
-
-    <button
-        class="play-btn"
-        onclick="playSong('song6', this)">
-
-        ▶
-
-    </button>
-
-
-    <div class="audio-controls">
-
-        <audio
-            id="song6"
-            src="malayalam/Mehabooba BEATMATE.mp3"
-            controls>
-        </audio>
-
-
-        <a
-            href="malayalam/Mehabooba BEATMATE.mp3"
-            download
-            class="download-btn">
-
-            ⬇ Download Song
-
-        </a>
-
-    </div>
-
-</div>
-
-
-</div>
-
-
-
-<!-- NO RESULTS -->
-
-<div
-    class="no-results"
-    id="noResults">
-
-    😔 No songs found
-
-</div>
-
-<!-- =====================================================
-     PAGINATION
-===================================================== -->
-<div class="pagination" id="paginationControls">
-    <button id="prevPageBtn" onclick="changePage(-1)">◀ Prev</button>
-    <span class="page-indicator">Page <span id="currentPageDisplay">1</span> / <span id="totalPagesDisplay">1</span></span>
-    <button id="nextPageBtn" onclick="changePage(1)">Next ▶</button>
-</div>
-
-
-<!-- =====================================================
-     BACK BUTTON
-===================================================== -->
-
-<a
-    href="contactus.html"
-    class="back">
-
-    <  Back to Home
-
-</a>
-
-
-
-<!-- CONTACT US -->
-<section class="contact-section" id="contact">
-  <div class="contact-card">
-    <h2>📧 Email <span>Us</span></h2>
-    <p class="contact-email">beatmateofficial@proton.me</p>
-    <p>We will respond within <strong>48 hours</strong>.</p>
-    <div class="contact-info">
-      <p><strong>Please include:</strong></p>
-      <p>• Your name</p>
-      <p>• Any query or suggestion</p>
-      <p>
-        • Any relevant music or page link(if applicable)
-      </p>
-    </div>
-    <a href="vs.html" class="contact-back">← Back to Home</a>
-  </div>
-</section>
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer>
-
-    <p>
-
-        © 2026
-        <strong>BEATMATE</strong>
-
-    </p>
-
-
-    <p>
-
-        Made with ❤️ 
-
-    </p>
-
-</footer>
-
-
-
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
-
-<script>
-
-
-/* =====================================================
-   PLAY SONG
-===================================================== */
-
-// Helper: get currently visible songs (respecting pagination & filters)
-function getVisibleSongs() {
-    return filteredSongs.filter(song => song.style.display !== 'none');
-}
-
-function playSong(id, button) {
-
-
-    let selectedSong =
-        document.getElementById(id);
-
-
-    let allSongs =
-        document.querySelectorAll("audio");
-
-
-    let allControls =
-        document.querySelectorAll(
-            ".audio-controls"
-        );
-
-
-    let allButtons =
-        document.querySelectorAll(
-            ".play-btn"
-        );
-
-
-    /* STOP OTHER SONGS */
-
-    allSongs.forEach(function(audio) {
-
-        if (audio !== selectedSong) {
-
-            audio.pause();
-
-            audio.currentTime = 0;
-
+    <script>
+        // ============================================================
+        // GLOBALS
+        // ============================================================
+        let currentPage = 1;
+        const itemsPerPage = 10;
+        let allSongs = [];
+        let filteredSongs = [];
+
+        let npAudio = document.getElementById('npAudio');
+        let npPlayPause = document.getElementById('npPlayPause');
+        let npProgress = document.getElementById('npProgress');
+        let npCurrentTime = document.getElementById('npCurrentTime');
+        let npDuration = document.getElementById('npDuration');
+        let npTitle = document.getElementById('npTitle');
+        let npArtist = document.getElementById('npArtist');
+        let npCover = document.getElementById('npCover');
+        let npBar = document.getElementById('nowPlayingBar');
+
+        let currentSongContainer = null;
+        let currentPlayButton = null;
+        let isSeeking = false;
+
+        // ============================================================
+        // UPDATE PROGRESS BAR FILL
+        // ============================================================
+        function updateProgressFill(value) {
+            npProgress.style.setProperty('--progress', value + '%');
         }
 
-    });
+        // ============================================================
+        // UPDATE NOW PLAYING BAR WITH CURRENT SONG INFO
+        // ============================================================
+        function updateNowPlayingBar(container) {
+            // Get the image from the song card
+            let img = container.querySelector('img');
+            let titleEl = container.querySelector('.song-info h3');
+            let artistEl = container.querySelector('.song-info p');
 
+            console.log('Updating bar with:', {
+                imgSrc: img ? img.src : 'no image',
+                title: titleEl ? titleEl.innerText : 'no title',
+                artist: artistEl ? artistEl.innerText : 'no artist'
+            });
 
-    /* HIDE OTHER CONTROLS */
-
-    allControls.forEach(function(control) {
-
-        if (
-            control !==
-            selectedSong.parentElement
-        ) {
-
-            control.classList.remove("show");
-
-        }
-
-    });
-
-
-    /* RESET OTHER BUTTONS */
-
-    allButtons.forEach(function(btn) {
-
-        if (btn !== button) {
-
-            btn.innerHTML = "▶";
-
-        }
-
-    });
-
-
-    /* PLAY / PAUSE */
-
-    if (selectedSong.paused) {
-
-
-        selectedSong
-            .parentElement
-            .classList
-            .add("show");
-
-
-        selectedSong.play();
-
-
-        button.innerHTML = "⏸";
-
-    }
-
-    else {
-
-
-        selectedSong.pause();
-
-
-        button.innerHTML = "▶";
-
-    }
-
-}
-
-
-/* =====================================================
-   PAGINATION STATE
-===================================================== */
-let currentPage = 1;
-const itemsPerPage = 10;
-let allSongs = []; // will be filled with all .song elements
-let filteredSongs = []; // currently displayed (filtered) list
-
-function updatePagination() {
-    const totalItems = filteredSongs.length;
-    const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
-    if (currentPage > totalPages) currentPage = totalPages;
-    if (currentPage < 1) currentPage = 1;
-
-    document.getElementById('currentPageDisplay').innerText = currentPage;
-    document.getElementById('totalPagesDisplay').innerText = totalPages;
-
-    document.getElementById('prevPageBtn').disabled = (currentPage === 1);
-    document.getElementById('nextPageBtn').disabled = (currentPage === totalPages);
-
-    // hide all songs first
-    allSongs.forEach(song => song.style.display = 'none');
-
-    // show only items for current page
-    const start = (currentPage - 1) * itemsPerPage;
-    const end = Math.min(start + itemsPerPage, totalItems);
-    for (let i = start; i < end; i++) {
-        if (filteredSongs[i]) {
-            filteredSongs[i].style.display = 'flex';
-        }
-    }
-
-    // if no items, show no results
-    const noResult = document.getElementById('noResults');
-    if (totalItems === 0) {
-        noResult.style.display = 'block';
-    } else {
-        noResult.style.display = 'none';
-    }
-}
-
-function changePage(delta) {
-    const totalItems = filteredSongs.length;
-    const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
-    const newPage = currentPage + delta;
-    if (newPage < 1 || newPage > totalPages) return;
-    currentPage = newPage;
-    updatePagination();
-    // scroll to top of music list
-    document.getElementById('musicList').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-/* =====================================================
-   SEARCH SONGS (with scroll to result)
-===================================================== */
-
-document.getElementById("songSearch").addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-        searchSongs();
-    }
-});
-
-
-function searchSongs() {
-
-
-    let input =
-        document
-        .getElementById("songSearch")
-        .value
-        .toLowerCase();
-
-
-    let songs =
-        document.querySelectorAll(".song");
-
-
-    let found = false;
-    let firstFoundSong = null;
-
-    // reset filtered list
-    filteredSongs = [];
-
-    songs.forEach(function(song) {
-
-
-        let name =
-            song
-            .querySelector("h3")
-            .innerText
-            .toLowerCase();
-
-
-        let language =
-            song
-            .getAttribute("data-language");
-
-
-        let type =
-            song
-            .getAttribute("data-type");
-
-
-        if (
-            name.includes(input)
-            ||
-            language.includes(input)
-            ||
-            type.includes(input)
-        ) {
-
-            filteredSongs.push(song);
-            if (!firstFoundSong) {
-                firstFoundSong = song;
+            // Update cover image - force reload by adding timestamp
+            if (img) {
+                npCover.src = img.src;
+                npCover.alt = titleEl ? titleEl.innerText : 'cover';
+                // Force image reload
+                npCover.style.display = 'none';
+                setTimeout(() => {
+                    npCover.style.display = 'block';
+                }, 10);
             }
-            found = true;
 
-        }
-
-    });
-
-    // reset to page 1
-    currentPage = 1;
-    updatePagination();
-
-    /* SCROLL TO THE FIRST FOUND SONG (with a small delay to ensure DOM updates) */
-    if (found && input.trim() !== "") {
-        setTimeout(function() {
-            if (firstFoundSong) {
-                firstFoundSong.scrollIntoView({
-                    behavior: "smooth",
-                    block: "center"
-                });
+            // Update title
+            if (titleEl) {
+                npTitle.textContent = titleEl.innerText;
             }
-        }, 100);
-    } else if (!found && input.trim() !== "") {
-        // if no result, scroll to "no results" message
-        setTimeout(function() {
-            const noResult = document.getElementById("noResults");
-            if (noResult) {
-                noResult.scrollIntoView({
-                    behavior: "smooth",
-                    block: "center"
-                });
+
+            // Update artist
+            if (artistEl) {
+                npArtist.textContent = artistEl.innerText;
             }
-        }, 100);
-    }
-
-}
-
-
-/* =====================================================
-   LANGUAGE FILTER
-===================================================== */
-
-function filterLanguage(language, button) {
-
-
-    let songs =
-        document.querySelectorAll(".song");
-
-
-    let buttons =
-        document.querySelectorAll(
-            ".language-btn"
-        );
-
-
-    /* ACTIVE LANGUAGE BUTTON */
-
-    buttons.forEach(function(btn) {
-
-        btn.classList.remove("active");
-
-    });
-
-
-    button.classList.add("active");
-
-
-    /* CLEAR SEARCH */
-
-    document.getElementById(
-        "songSearch"
-    ).value = "";
-
-
-    // rebuild filtered list
-    filteredSongs = [];
-    songs.forEach(function(song) {
-        let songLanguage = song.getAttribute("data-language");
-        if (language === "all" || songLanguage === language) {
-            filteredSongs.push(song);
         }
-    });
 
-    currentPage = 1;
-    updatePagination();
+        // ============================================================
+        // PLAY SONG
+        // ============================================================
+        function playSong(id, button) {
+            let selectedAudio = document.getElementById(id);
+            if (!selectedAudio) return;
+            let container = selectedAudio.closest('.song');
+            if (!container) return;
 
-}
+            // If same song and playing -> pause
+            if (currentSongContainer === container && !selectedAudio.paused) {
+                selectedAudio.pause();
+                button.innerHTML = '▶';
+                npPlayPause.innerHTML = '▶';
+                return;
+            }
 
+            // Stop others
+            document.querySelectorAll('audio').forEach(a => {
+                if (a !== selectedAudio) { a.pause();
+                    a.currentTime = 0; }
+            });
+            document.querySelectorAll('.audio-controls').forEach(c => c.classList.remove('show'));
+            document.querySelectorAll('.play-btn').forEach(b => {
+                if (b !== button) b.innerHTML = '▶';
+            });
 
-/* =====================================================
-   TYPE FILTER
-===================================================== */
+            // Show controls for this song
+            let controls = container.querySelector('.audio-controls');
+            if (controls) controls.classList.add('show');
 
-function filterType(type, button) {
+            // Play
+            selectedAudio.play();
+            button.innerHTML = '⏸';
+            npPlayPause.innerHTML = '⏸';
 
+            currentSongContainer = container;
+            currentPlayButton = button;
 
-    let songs =
-        document.querySelectorAll(".song");
+            // Update the now-playing bar with the current song's info
+            updateNowPlayingBar(container);
 
+            // Sync bar audio
+            npAudio.src = selectedAudio.src;
+            npAudio.load();
+            npAudio.currentTime = selectedAudio.currentTime;
+            npAudio.play().catch(() => {});
 
-    let buttons =
-        document.querySelectorAll(
-            ".sub-btn"
-        );
-
-
-    /* ACTIVE TYPE BUTTON */
-
-    buttons.forEach(function(btn) {
-
-        btn.classList.remove("active");
-
-    });
-
-
-    button.classList.add("active");
-
-
-    /* CLEAR SEARCH */
-
-    document.getElementById(
-        "songSearch"
-    ).value = "";
-
-
-    // rebuild filtered list
-    filteredSongs = [];
-    songs.forEach(function(song) {
-        let songType = song.getAttribute("data-type");
-        if (songType === type) {
-            filteredSongs.push(song);
+            npBar.style.display = 'flex';
         }
-    });
 
-    currentPage = 1;
-    updatePagination();
+        // ============================================================
+        // BAR CONTROLS
+        // ============================================================
+        npPlayPause.addEventListener('click', function() {
+            if (!currentSongContainer) return;
+            let audio = currentSongContainer.querySelector('audio');
+            if (!audio) return;
+            let btn = currentSongContainer.querySelector('.play-btn');
+            if (audio.paused) {
+                audio.play();
+                btn.innerHTML = '⏸';
+                this.innerHTML = '⏸';
+                npAudio.src = audio.src;
+                npAudio.currentTime = audio.currentTime;
+                npAudio.play().catch(() => {});
+            } else {
+                audio.pause();
+                btn.innerHTML = '▶';
+                this.innerHTML = '▶';
+                npAudio.pause();
+            }
+        });
 
-}
-
-
-/* =====================================================
-   SHOW ALL SONGS
-===================================================== */
-
-function showAllTypes(button) {
-
-
-    let songs =
-        document.querySelectorAll(".song");
-
-
-    let buttons =
-        document.querySelectorAll(
-            ".sub-btn"
-        );
-
-
-    buttons.forEach(function(btn) {
-
-        btn.classList.remove("active");
-
-    });
-
-
-    button.classList.add("active");
-
-
-    document.getElementById(
-        "songSearch"
-    ).value = "";
-
-
-    // show all
-    filteredSongs = [];
-    songs.forEach(function(song) {
-        filteredSongs.push(song);
-    });
-
-    currentPage = 1;
-    updatePagination();
-
-}
-
-
-/* =====================================================
-   SONG ENDED - Auto play next visible song
-===================================================== */
-
-document
-.querySelectorAll("audio")
-.forEach(function(audio) {
-
-
-    audio.addEventListener(
-        "ended",
-        function() {
-
-            // Get the song container
-            let songContainer = this.closest(".song");
-            // Get the play button inside this song
-            let button = songContainer.querySelector(".play-btn");
-            // Reset this button to play symbol
-            button.innerHTML = "▶";
-
-            // Get the list of currently visible songs (respect pagination & filters)
+        document.getElementById('prevBtn').addEventListener('click', function() {
             let visible = getVisibleSongs();
+            if (!currentSongContainer || visible.length === 0) return;
+            let idx = visible.indexOf(currentSongContainer);
+            if (idx === -1) idx = 0;
+            let prevIdx = (idx - 1 + visible.length) % visible.length;
+            let prevContainer = visible[prevIdx];
+            let prevAudio = prevContainer.querySelector('audio');
+            let prevBtn = prevContainer.querySelector('.play-btn');
+            if (prevAudio && prevBtn) playSong(prevAudio.id, prevBtn);
+        });
 
-            // Find index of current song in the visible list
-            let currentIndex = visible.indexOf(songContainer);
-            if (currentIndex === -1) return;
+        document.getElementById('nextBtn').addEventListener('click', function() {
+            let visible = getVisibleSongs();
+            if (!currentSongContainer || visible.length === 0) return;
+            let idx = visible.indexOf(currentSongContainer);
+            if (idx === -1) idx = 0;
+            let nextIdx = (idx + 1) % visible.length;
+            let nextContainer = visible[nextIdx];
+            let nextAudio = nextContainer.querySelector('audio');
+            let nextBtn = nextContainer.querySelector('.play-btn');
+            if (nextAudio && nextBtn) playSong(nextAudio.id, nextBtn);
+        });
 
-            // Calculate next index (loop to first if at end)
-            let nextIndex = (currentIndex + 1) % visible.length;
+        // Progress
+        npAudio.addEventListener('timeupdate', function() {
+            if (!isSeeking && this.duration) {
+                let pct = (this.currentTime / this.duration) * 100;
+                npProgress.value = pct;
+                updateProgressFill(pct);
+                npCurrentTime.textContent = formatTime(this.currentTime);
+                npDuration.textContent = formatTime(this.duration);
+            }
+        });
 
-            // If there is a next song, play it
-            if (visible[nextIndex]) {
-                let nextSongContainer = visible[nextIndex];
-                let nextAudio = nextSongContainer.querySelector("audio");
-                let nextButton = nextSongContainer.querySelector(".play-btn");
-                
-                // Use the playSong function to trigger play
-                // Pass the audio id and the button element
-                if (nextAudio && nextButton) {
-                    playSong(nextAudio.id, nextButton);
+        npProgress.addEventListener('input', function() {
+            isSeeking = true;
+            let pct = this.value;
+            updateProgressFill(pct);
+            if (npAudio.duration) {
+                npAudio.currentTime = (pct / 100) * npAudio.duration;
+                if (currentSongContainer) {
+                    let mainAudio = currentSongContainer.querySelector('audio');
+                    if (mainAudio && mainAudio.src === npAudio.src) {
+                        mainAudio.currentTime = npAudio.currentTime;
+                    }
                 }
             }
+        });
+        npProgress.addEventListener('change', function() { isSeeking = false; });
 
+        // Auto-next
+        npAudio.addEventListener('ended', function() {
+            if (currentSongContainer) {
+                let btn = currentSongContainer.querySelector('.play-btn');
+                if (btn) btn.innerHTML = '▶';
+            }
+            npPlayPause.innerHTML = '▶';
+            document.getElementById('nextBtn').click();
+        });
+
+        // Sync main audio -> bar
+        document.querySelectorAll('audio').forEach(a => {
+            a.addEventListener('timeupdate', function() {
+                if (this === npAudio) return;
+                if (this === currentSongContainer?.querySelector('audio')) {
+                    if (!isSeeking && npAudio.src === this.src) {
+                        npAudio.currentTime = this.currentTime;
+                    }
+                }
+            });
+        });
+
+        // ============================================================
+        // HELPERS
+        // ============================================================
+        function formatTime(sec) {
+            if (!sec || isNaN(sec)) return '0:00';
+            let m = Math.floor(sec / 60);
+            let s = Math.floor(sec % 60);
+            return m + ':' + (s < 10 ? '0' : '') + s;
         }
-    );
 
-});
+        function getVisibleSongs() {
+            return filteredSongs.filter(s => s.style.display !== 'none');
+        }
 
-function showContact(event){event.preventDefault();document.body.classList.add("contact-open");document.getElementById("contact").scrollIntoView({behavior:"smooth"});}
+        // ============================================================
+        // PAGINATION
+        // ============================================================
+        function updatePagination() {
+            const totalItems = filteredSongs.length;
+            const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
+            if (currentPage > totalPages) currentPage = totalPages;
+            if (currentPage < 1) currentPage = 1;
 
+            document.getElementById('currentPageDisplay').innerText = currentPage;
+            document.getElementById('totalPagesDisplay').innerText = totalPages;
+            document.getElementById('prevPageBtn').disabled = (currentPage === 1);
+            document.getElementById('nextPageBtn').disabled = (currentPage === totalPages);
 
-/* =====================================================
-   INIT: load all songs
-===================================================== */
-window.addEventListener('DOMContentLoaded', function() {
-    allSongs = Array.from(document.querySelectorAll('.song'));
-    filteredSongs = [...allSongs];
-    currentPage = 1;
-    updatePagination();
-});
+            allSongs.forEach(song => song.style.display = 'none');
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = Math.min(start + itemsPerPage, totalItems);
+            for (let i = start; i < end; i++) {
+                if (filteredSongs[i]) filteredSongs[i].style.display = 'flex';
+            }
 
-</script>
+            const noResult = document.getElementById('noResults');
+            if (totalItems === 0) { noResult.style.display = 'block'; } else { noResult.style.display = 'none'; }
+        }
 
+        function changePage(delta) {
+            const totalItems = filteredSongs.length;
+            const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
+            const newPage = currentPage + delta;
+            if (newPage < 1 || newPage > totalPages) return;
+            currentPage = newPage;
+            updatePagination();
+            document.getElementById('musicList').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
 
+        // ============================================================
+        // SEARCH
+        // ============================================================
+        document.getElementById('songSearch').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') searchSongs();
+        });
+
+        function searchSongs() {
+            let input = document.getElementById('songSearch').value.toLowerCase();
+            let songs = document.querySelectorAll('.song');
+            filteredSongs = [];
+            songs.forEach(song => {
+                let name = song.querySelector('h3')?.innerText.toLowerCase() || '';
+                let lang = song.getAttribute('data-language') || '';
+                let type = song.getAttribute('data-type') || '';
+                if (name.includes(input) || lang.includes(input) || type.includes(input)) {
+                    filteredSongs.push(song);
+                }
+            });
+            currentPage = 1;
+            updatePagination();
+        }
+
+        // ============================================================
+        // FILTERS
+        // ============================================================
+        function filterLanguage(language, button) {
+            document.querySelectorAll('.language-btn').forEach(b => b.classList.remove('active'));
+            button.classList.add('active');
+            document.getElementById('songSearch').value = '';
+            let songs = document.querySelectorAll('.song');
+            filteredSongs = [];
+            songs.forEach(song => {
+                let lang = song.getAttribute('data-language');
+                if (language === 'all' || lang === language) filteredSongs.push(song);
+            });
+            currentPage = 1;
+            updatePagination();
+        }
+
+        function filterType(type, button) {
+            document.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
+            button.classList.add('active');
+            document.getElementById('songSearch').value = '';
+            let songs = document.querySelectorAll('.song');
+            filteredSongs = [];
+            songs.forEach(song => {
+                let t = song.getAttribute('data-type');
+                if (t === type) filteredSongs.push(song);
+            });
+            currentPage = 1;
+            updatePagination();
+        }
+
+        function showAllTypes(button) {
+            document.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
+            button.classList.add('active');
+            document.getElementById('songSearch').value = '';
+            filteredSongs = Array.from(document.querySelectorAll('.song'));
+            currentPage = 1;
+            updatePagination();
+        }
+
+        // ============================================================
+        // CONTACT
+        // ============================================================
+        function showContact(e) {
+            e.preventDefault();
+            document.body.classList.add('contact-open');
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // ============================================================
+        // INIT
+        // ============================================================
+        window.addEventListener('DOMContentLoaded', function() {
+            allSongs = Array.from(document.querySelectorAll('.song'));
+            filteredSongs = [...allSongs];
+            currentPage = 1;
+            updatePagination();
+
+            document.querySelectorAll('audio').forEach(a => {
+                a.addEventListener('ended', function() {
+                    if (currentSongContainer && this === currentSongContainer.querySelector('audio')) {
+                        document.getElementById('nextBtn').click();
+                    }
+                });
+            });
+
+            // Initialize progress fill
+            updateProgressFill(0);
+        });
+    </script>
 
 </body>
-    </html>
+</html>
