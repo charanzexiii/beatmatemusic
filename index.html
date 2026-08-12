@@ -164,6 +164,25 @@ nav {
     transition: 0.3s;
 }
 
+.search-btn {
+    margin-left: 10px;
+    padding: 15px 25px;
+    border: 2px solid #ff1744;
+    border-radius: 30px;
+    background: #ff1744;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.search-btn:hover {
+    background: #e60032;
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(255, 23, 68, 0.5);
+}
+
 .music-search input:focus {
     box-shadow:
         0 0 25px
@@ -725,8 +744,18 @@ body.contact-open .music-header,body.contact-open .music-search,body.contact-ope
     }
 
 
+    .music-search {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
     .music-search input {
         width: 90%;
+    }
+
+    .search-btn {
+        margin-left: 0;
+        padding: 12px 22px;
     }
 
 
@@ -853,8 +882,14 @@ body.contact-open .music-header,body.contact-open .music-search,body.contact-ope
         type="text"
         id="songSearch"
         placeholder="🔍 Search songs..."
-        onkeyup="searchSongs()"
     >
+
+    <button
+        type="button"
+        class="search-btn"
+        onclick="searchSongs()">
+        🔍 Search
+    </button>
 
 </div>
 
@@ -1538,6 +1573,13 @@ function playSong(id, button) {
    SEARCH SONGS
 ===================================================== */
 
+document.getElementById("songSearch").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        searchSongs();
+    }
+});
+
+
 function searchSongs() {
 
 
@@ -1553,6 +1595,7 @@ function searchSongs() {
 
 
     let found = false;
+    let firstFoundSong = null;
 
 
     songs.forEach(function(song) {
@@ -1586,6 +1629,9 @@ function searchSongs() {
 
             song.style.display = "flex";
 
+            if (!firstFoundSong) {
+                firstFoundSong = song;
+            }
 
             found = true;
 
@@ -1604,6 +1650,17 @@ function searchSongs() {
         .getElementById("noResults")
         .style.display =
             found ? "none" : "block";
+
+
+    /* SCROLL TO THE FIRST FOUND SONG */
+    if (found && input.trim() !== "") {
+        setTimeout(function() {
+            firstFoundSong.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+        }, 50);
+    }
 
 }
 
@@ -1843,4 +1900,4 @@ function showContact(event){event.preventDefault();document.body.classList.add("
 
 
 </head>
-</html>
+        </html>
