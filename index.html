@@ -1574,6 +1574,11 @@ body.contact-open .music-header,body.contact-open .music-search,body.contact-ope
    PLAY SONG
 ===================================================== */
 
+// Helper: get currently visible songs (respecting pagination & filters)
+function getVisibleSongs() {
+    return filteredSongs.filter(song => song.style.display !== 'none');
+}
+
 function playSong(id, button) {
 
 
@@ -1970,7 +1975,7 @@ function showAllTypes(button) {
 
 
 /* =====================================================
-   SONG ENDED
+   SONG ENDED - Auto play next visible song
 ===================================================== */
 
 document
@@ -1982,16 +1987,35 @@ document
         "ended",
         function() {
 
-
-            let button =
-                this
-                .closest(".song")
-                .querySelector(
-                    ".play-btn"
-                );
-
-
+            // Get the song container
+            let songContainer = this.closest(".song");
+            // Get the play button inside this song
+            let button = songContainer.querySelector(".play-btn");
+            // Reset this button to play symbol
             button.innerHTML = "▶";
+
+            // Get the list of currently visible songs (respect pagination & filters)
+            let visible = getVisibleSongs();
+
+            // Find index of current song in the visible list
+            let currentIndex = visible.indexOf(songContainer);
+            if (currentIndex === -1) return;
+
+            // Calculate next index (loop to first if at end)
+            let nextIndex = (currentIndex + 1) % visible.length;
+
+            // If there is a next song, play it
+            if (visible[nextIndex]) {
+                let nextSongContainer = visible[nextIndex];
+                let nextAudio = nextSongContainer.querySelector("audio");
+                let nextButton = nextSongContainer.querySelector(".play-btn");
+                
+                // Use the playSong function to trigger play
+                // Pass the audio id and the button element
+                if (nextAudio && nextButton) {
+                    playSong(nextAudio.id, nextButton);
+                }
+            }
 
         }
     );
@@ -2016,4 +2040,4 @@ window.addEventListener('DOMContentLoaded', function() {
 
 
 </body>
-            </html>
+    </html>
