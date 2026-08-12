@@ -1,4 +1,4 @@
 # beatmatemusic
-YOU CAN ALSO EXPLORE THIS WEBSITE
+YOU CAN ALSO SEE OUR WEBSITE 
 
-https://beatmatemusicc.onrender.com/beatmate.html
+https://beatmatemusicc.onrender.com/index.html
