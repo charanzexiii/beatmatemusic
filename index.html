@@ -995,304 +995,296 @@ audio::-webkit-media-controls-volume-slider {
     </div>
 
     <script>
-        // ============================================================
-        // GLOBALS
-        // ============================================================
         let currentPage = 1;
         const itemsPerPage = 10;
         let allSongs = [];
         let filteredSongs = [];
-
-        let npAudio = document.getElementById('npAudio');
-        let npPlayPause = document.getElementById('npPlayPause');
-        let npProgress = document.getElementById('npProgress');
-        let npCurrentTime = document.getElementById('npCurrentTime');
-        let npDuration = document.getElementById('npDuration');
-        let npTitle = document.getElementById('npTitle');
-        let npArtist = document.getElementById('npArtist');
-        let npCover = document.getElementById('npCover');
-        let npBar = document.getElementById('nowPlayingBar');
-
         let currentSongContainer = null;
         let currentPlayButton = null;
-        let isSeeking = false;
 
-        // ============================================================
-        // UPDATE PROGRESS BAR FILL
-        // ============================================================
+        const npPlayPause = document.getElementById('npPlayPause');
+        const npProgress = document.getElementById('npProgress');
+        const npCurrentTime = document.getElementById('npCurrentTime');
+        const npDuration = document.getElementById('npDuration');
+        const npTitle = document.getElementById('npTitle');
+        const npArtist = document.getElementById('npArtist');
+        const npCover = document.getElementById('npCover');
+        const npBar = document.getElementById('nowPlayingBar');
+
+        function getCurrentAudio() {
+            return currentSongContainer
+                ? currentSongContainer.querySelector('audio')
+                : null;
+        }
+
+        function formatTime(sec) {
+            if (!sec || isNaN(sec)) return '0:00';
+            const m = Math.floor(sec / 60);
+            const s = Math.floor(sec % 60);
+            return m + ':' + (s < 10 ? '0' : '') + s;
+        }
+
         function updateProgressFill(value) {
             npProgress.style.setProperty('--progress', value + '%');
         }
 
-        // ============================================================
-        // UPDATE NOW PLAYING BAR WITH CURRENT SONG INFO
-        // ============================================================
         function updateNowPlayingBar(container) {
-            // Get the image from the song card
-            let img = container.querySelector('img');
-            let titleEl = container.querySelector('.song-info h3');
-            let artistEl = container.querySelector('.song-info p');
+            const img = container.querySelector('img');
+            const title = container.querySelector('.song-info h3');
+            const artist = container.querySelector('.song-info p');
 
-            console.log('Updating bar with:', {
-                imgSrc: img ? img.src : 'no image',
-                title: titleEl ? titleEl.innerText : 'no title',
-                artist: artistEl ? artistEl.innerText : 'no artist'
-            });
+            if (img) npCover.src = img.src;
+            if (title) npTitle.textContent = title.innerText;
+            if (artist) npArtist.textContent = artist.innerText;
+        }
 
-            // Update cover image - force reload by adding timestamp
-            if (img) {
-                npCover.src = img.src;
-                npCover.alt = titleEl ? titleEl.innerText : 'cover';
-                // Force image reload
-                npCover.style.display = 'none';
-                setTimeout(() => {
-                    npCover.style.display = 'block';
-                }, 10);
+        function updatePlayerUI() {
+            const audio = getCurrentAudio();
+            if (!audio) return;
+
+            const playing = !audio.paused && !audio.ended;
+
+            if (currentPlayButton) {
+                currentPlayButton.innerHTML = playing ? '⏸' : '▶';
             }
 
-            // Update title
-            if (titleEl) {
-                npTitle.textContent = titleEl.innerText;
-            }
+            npPlayPause.innerHTML = playing ? '⏸' : '▶';
+            npCurrentTime.textContent = formatTime(audio.currentTime);
 
-            // Update artist
-            if (artistEl) {
-                npArtist.textContent = artistEl.innerText;
+            if (audio.duration && isFinite(audio.duration)) {
+                const pct = (audio.currentTime / audio.duration) * 100;
+                npProgress.value = pct;
+                updateProgressFill(pct);
+                npDuration.textContent = formatTime(audio.duration);
+            } else {
+                npProgress.value = 0;
+                updateProgressFill(0);
+                npDuration.textContent = '0:00';
             }
         }
 
-        // ============================================================
-        // PLAY SONG
-        // ============================================================
+        function stopOtherSongs(selectedAudio) {
+            document.querySelectorAll('.song audio').forEach(audio => {
+                if (audio !== selectedAudio) {
+                    audio.pause();
+                    audio.currentTime = 0;
+                }
+            });
+
+            document.querySelectorAll('.play-btn').forEach(btn => {
+                if (btn !== currentPlayButton) btn.innerHTML = '▶';
+            });
+        }
+
         function playSong(id, button) {
-            let selectedAudio = document.getElementById(id);
-            if (!selectedAudio) return;
-            let container = selectedAudio.closest('.song');
+            const audio = document.getElementById(id);
+            if (!audio) return;
+
+            const container = audio.closest('.song');
             if (!container) return;
 
-            // If same song and playing -> pause
-            if (currentSongContainer === container && !selectedAudio.paused) {
-                selectedAudio.pause();
-                button.innerHTML = '▶';
-                npPlayPause.innerHTML = '▶';
+            if (currentSongContainer === container) {
+                if (audio.paused) {
+                    audio.play().catch(console.error);
+                } else {
+                    audio.pause();
+                }
+                updatePlayerUI();
                 return;
             }
 
-            // Stop others
-            document.querySelectorAll('audio').forEach(a => {
-                if (a !== selectedAudio) { a.pause();
-                    a.currentTime = 0; }
-            });
-            document.querySelectorAll('.audio-controls').forEach(c => c.classList.remove('show'));
-            document.querySelectorAll('.play-btn').forEach(b => {
-                if (b !== button) b.innerHTML = '▶';
-            });
-
-            // Show controls for this song
-            let controls = container.querySelector('.audio-controls');
-            if (controls) controls.classList.add('show');
-
-            // Play
-            selectedAudio.play();
-            button.innerHTML = '⏸';
-            npPlayPause.innerHTML = '⏸';
+            stopOtherSongs(audio);
 
             currentSongContainer = container;
             currentPlayButton = button;
 
-            // Update the now-playing bar with the current song's info
+            document.querySelectorAll('.audio-controls').forEach(c => {
+                c.classList.remove('show');
+            });
+
+            const controls = container.querySelector('.audio-controls');
+            if (controls) controls.classList.add('show');
+
             updateNowPlayingBar(container);
-
-            // Sync bar audio
-            npAudio.src = selectedAudio.src;
-            npAudio.load();
-            npAudio.currentTime = selectedAudio.currentTime;
-            npAudio.play().catch(() => {});
-
             npBar.style.display = 'flex';
+
+            // ONLY THIS AUDIO ELEMENT produces sound.
+            // The bottom player is only a controller/display.
+            audio.play().catch(console.error);
         }
 
-        // ============================================================
-        // BAR CONTROLS
-        // ============================================================
-        npPlayPause.addEventListener('click', function() {
-            if (!currentSongContainer) return;
-            let audio = currentSongContainer.querySelector('audio');
+        npPlayPause.addEventListener('click', function () {
+            const audio = getCurrentAudio();
             if (!audio) return;
-            let btn = currentSongContainer.querySelector('.play-btn');
+
             if (audio.paused) {
-                audio.play();
-                btn.innerHTML = '⏸';
-                this.innerHTML = '⏸';
-                npAudio.src = audio.src;
-                npAudio.currentTime = audio.currentTime;
-                npAudio.play().catch(() => {});
+                audio.play().catch(console.error);
             } else {
                 audio.pause();
-                btn.innerHTML = '▶';
-                this.innerHTML = '▶';
-                npAudio.pause();
             }
         });
 
-        document.getElementById('prevBtn').addEventListener('click', function() {
-            let visible = getVisibleSongs();
-            if (!currentSongContainer || visible.length === 0) return;
-            let idx = visible.indexOf(currentSongContainer);
-            if (idx === -1) idx = 0;
-            let prevIdx = (idx - 1 + visible.length) % visible.length;
-            let prevContainer = visible[prevIdx];
-            let prevAudio = prevContainer.querySelector('audio');
-            let prevBtn = prevContainer.querySelector('.play-btn');
-            if (prevAudio && prevBtn) playSong(prevAudio.id, prevBtn);
+        document.getElementById('prevBtn').addEventListener('click', function () {
+            const visible = getVisibleSongs();
+            if (!currentSongContainer || !visible.length) return;
+
+            let index = visible.indexOf(currentSongContainer);
+            if (index < 0) index = 0;
+
+            const container = visible[(index - 1 + visible.length) % visible.length];
+            const audio = container.querySelector('audio');
+            const button = container.querySelector('.play-btn');
+
+            if (audio && button) playSong(audio.id, button);
         });
 
-        document.getElementById('nextBtn').addEventListener('click', function() {
-            let visible = getVisibleSongs();
-            if (!currentSongContainer || visible.length === 0) return;
-            let idx = visible.indexOf(currentSongContainer);
-            if (idx === -1) idx = 0;
-            let nextIdx = (idx + 1) % visible.length;
-            let nextContainer = visible[nextIdx];
-            let nextAudio = nextContainer.querySelector('audio');
-            let nextBtn = nextContainer.querySelector('.play-btn');
-            if (nextAudio && nextBtn) playSong(nextAudio.id, nextBtn);
+        document.getElementById('nextBtn').addEventListener('click', function () {
+            const visible = getVisibleSongs();
+            if (!currentSongContainer || !visible.length) return;
+
+            let index = visible.indexOf(currentSongContainer);
+            if (index < 0) index = 0;
+
+            const container = visible[(index + 1) % visible.length];
+            const audio = container.querySelector('audio');
+            const button = container.querySelector('.play-btn');
+
+            if (audio && button) playSong(audio.id, button);
         });
 
-        // Progress
-        npAudio.addEventListener('timeupdate', function() {
-            if (!isSeeking && this.duration) {
-                let pct = (this.currentTime / this.duration) * 100;
-                npProgress.value = pct;
-                updateProgressFill(pct);
-                npCurrentTime.textContent = formatTime(this.currentTime);
-                npDuration.textContent = formatTime(this.duration);
-            }
-        });
+        document.querySelectorAll('.song audio').forEach(audio => {
+            audio.addEventListener('play', function () {
+                document.querySelectorAll('.song audio').forEach(other => {
+                    if (other !== audio) other.pause();
+                });
 
-        npProgress.addEventListener('input', function() {
-            isSeeking = true;
-            let pct = this.value;
-            updateProgressFill(pct);
-            if (npAudio.duration) {
-                npAudio.currentTime = (pct / 100) * npAudio.duration;
-                if (currentSongContainer) {
-                    let mainAudio = currentSongContainer.querySelector('audio');
-                    if (mainAudio && mainAudio.src === npAudio.src) {
-                        mainAudio.currentTime = npAudio.currentTime;
-                    }
+                const container = audio.closest('.song');
+
+                if (currentSongContainer !== container) {
+                    currentSongContainer = container;
+                    currentPlayButton = container.querySelector('.play-btn');
+                    updateNowPlayingBar(container);
+                    npBar.style.display = 'flex';
                 }
-            }
-        });
-        npProgress.addEventListener('change', function() { isSeeking = false; });
 
-        // Auto-next
-        npAudio.addEventListener('ended', function() {
-            if (currentSongContainer) {
-                let btn = currentSongContainer.querySelector('.play-btn');
-                if (btn) btn.innerHTML = '▶';
-            }
-            npPlayPause.innerHTML = '▶';
-            document.getElementById('nextBtn').click();
-        });
+                updatePlayerUI();
+            });
 
-        // Sync main audio -> bar
-        document.querySelectorAll('audio').forEach(a => {
-            a.addEventListener('timeupdate', function() {
-                if (this === npAudio) return;
-                if (this === currentSongContainer?.querySelector('audio')) {
-                    if (!isSeeking && npAudio.src === this.src) {
-                        npAudio.currentTime = this.currentTime;
+            audio.addEventListener('pause', updatePlayerUI);
+            audio.addEventListener('timeupdate', updatePlayerUI);
+            audio.addEventListener('loadedmetadata', updatePlayerUI);
+
+            audio.addEventListener('ended', function () {
+                const container = audio.closest('.song');
+                if (container !== currentSongContainer) return;
+
+                const visible = getVisibleSongs();
+                const index = visible.indexOf(container);
+
+                if (index >= 0 && visible.length > 1) {
+                    const next = visible[(index + 1) % visible.length];
+                    const nextAudio = next.querySelector('audio');
+                    const nextButton = next.querySelector('.play-btn');
+
+                    if (nextAudio && nextButton) {
+                        playSong(nextAudio.id, nextButton);
                     }
+                } else {
+                    updatePlayerUI();
                 }
             });
         });
 
-        // ============================================================
-        // HELPERS
-        // ============================================================
-        function formatTime(sec) {
-            if (!sec || isNaN(sec)) return '0:00';
-            let m = Math.floor(sec / 60);
-            let s = Math.floor(sec % 60);
-            return m + ':' + (s < 10 ? '0' : '') + s;
-        }
+        npProgress.addEventListener('input', function () {
+            const audio = getCurrentAudio();
+            if (!audio || !audio.duration) return;
+
+            const percent = Number(this.value);
+            audio.currentTime = (percent / 100) * audio.duration;
+            updateProgressFill(percent);
+            npCurrentTime.textContent = formatTime(audio.currentTime);
+        });
 
         function getVisibleSongs() {
-            return filteredSongs.filter(s => s.style.display !== 'none');
+            return filteredSongs.filter(song => song.style.display !== 'none');
         }
 
-        // ============================================================
-        // PAGINATION
-        // ============================================================
         function updatePagination() {
             const totalItems = filteredSongs.length;
             const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
+
             if (currentPage > totalPages) currentPage = totalPages;
             if (currentPage < 1) currentPage = 1;
 
             document.getElementById('currentPageDisplay').innerText = currentPage;
             document.getElementById('totalPagesDisplay').innerText = totalPages;
-            document.getElementById('prevPageBtn').disabled = (currentPage === 1);
-            document.getElementById('nextPageBtn').disabled = (currentPage === totalPages);
+            document.getElementById('prevPageBtn').disabled = currentPage === 1;
+            document.getElementById('nextPageBtn').disabled = currentPage === totalPages;
 
             allSongs.forEach(song => song.style.display = 'none');
+
             const start = (currentPage - 1) * itemsPerPage;
             const end = Math.min(start + itemsPerPage, totalItems);
+
             for (let i = start; i < end; i++) {
                 if (filteredSongs[i]) filteredSongs[i].style.display = 'flex';
             }
 
-            const noResult = document.getElementById('noResults');
-            if (totalItems === 0) { noResult.style.display = 'block'; } else { noResult.style.display = 'none'; }
+            document.getElementById('noResults').style.display =
+                totalItems === 0 ? 'block' : 'none';
         }
 
         function changePage(delta) {
-            const totalItems = filteredSongs.length;
-            const totalPages = Math.ceil(totalItems / itemsPerPage) || 1;
+            const totalPages = Math.ceil(filteredSongs.length / itemsPerPage) || 1;
             const newPage = currentPage + delta;
+
             if (newPage < 1 || newPage > totalPages) return;
+
             currentPage = newPage;
             updatePagination();
-            document.getElementById('musicList').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            document.getElementById('musicList').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
         }
 
-        // ============================================================
-        // SEARCH
-        // ============================================================
         document.getElementById('songSearch').addEventListener('keydown', function(e) {
             if (e.key === 'Enter') searchSongs();
         });
 
         function searchSongs() {
-            let input = document.getElementById('songSearch').value.toLowerCase();
-            let songs = document.querySelectorAll('.song');
-            filteredSongs = [];
-            songs.forEach(song => {
-                let name = song.querySelector('h3')?.innerText.toLowerCase() || '';
-                let lang = song.getAttribute('data-language') || '';
-                let type = song.getAttribute('data-type') || '';
-                if (name.includes(input) || lang.includes(input) || type.includes(input)) {
-                    filteredSongs.push(song);
-                }
+            const input = document.getElementById('songSearch').value.trim().toLowerCase();
+
+            filteredSongs = allSongs.filter(song => {
+                const name = song.querySelector('h3')?.innerText.toLowerCase() || '';
+                const lang = song.getAttribute('data-language') || '';
+                const type = song.getAttribute('data-type') || '';
+
+                return name.includes(input) ||
+                       lang.includes(input) ||
+                       type.includes(input);
             });
+
             currentPage = 1;
             updatePagination();
+
+            document.getElementById('musicList').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
         }
 
-        // ============================================================
-        // FILTERS
-        // ============================================================
         function filterLanguage(language, button) {
             document.querySelectorAll('.language-btn').forEach(b => b.classList.remove('active'));
             button.classList.add('active');
             document.getElementById('songSearch').value = '';
-            let songs = document.querySelectorAll('.song');
-            filteredSongs = [];
-            songs.forEach(song => {
-                let lang = song.getAttribute('data-language');
-                if (language === 'all' || lang === language) filteredSongs.push(song);
+
+            filteredSongs = allSongs.filter(song => {
+                return language === 'all' ||
+                       song.getAttribute('data-language') === language;
             });
+
             currentPage = 1;
             updatePagination();
         }
@@ -1301,12 +1293,11 @@ audio::-webkit-media-controls-volume-slider {
             document.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
             button.classList.add('active');
             document.getElementById('songSearch').value = '';
-            let songs = document.querySelectorAll('.song');
-            filteredSongs = [];
-            songs.forEach(song => {
-                let t = song.getAttribute('data-type');
-                if (t === type) filteredSongs.push(song);
+
+            filteredSongs = allSongs.filter(song => {
+                return song.getAttribute('data-type') === type;
             });
+
             currentPage = 1;
             updatePagination();
         }
@@ -1315,38 +1306,25 @@ audio::-webkit-media-controls-volume-slider {
             document.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
             button.classList.add('active');
             document.getElementById('songSearch').value = '';
-            filteredSongs = Array.from(document.querySelectorAll('.song'));
+
+            filteredSongs = [...allSongs];
             currentPage = 1;
             updatePagination();
         }
 
-        // ============================================================
-        // CONTACT
-        // ============================================================
         function showContact(e) {
             e.preventDefault();
             document.body.classList.add('contact-open');
-            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('contact').scrollIntoView({
+                behavior: 'smooth'
+            });
         }
 
-        // ============================================================
-        // INIT
-        // ============================================================
         window.addEventListener('DOMContentLoaded', function() {
             allSongs = Array.from(document.querySelectorAll('.song'));
             filteredSongs = [...allSongs];
             currentPage = 1;
             updatePagination();
-
-            document.querySelectorAll('audio').forEach(a => {
-                a.addEventListener('ended', function() {
-                    if (currentSongContainer && this === currentSongContainer.querySelector('audio')) {
-                        document.getElementById('nextBtn').click();
-                    }
-                });
-            });
-
-            // Initialize progress fill
             updateProgressFill(0);
         });
     </script>
