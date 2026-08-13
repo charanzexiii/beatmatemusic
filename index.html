@@ -915,10 +915,10 @@ audio::-webkit-media-controls-volume-slider {
         <div class="subcategory">
             <h3>Browse by <span>Type</span></h3>
             <div class="subcategory-buttons">
-                <button class="sub-btn active" onclick="showAllTypes(this)">🎶 All</button>
-                <button class="sub-btn" onclick="filterType('romantic', this)">❤️ Romantic</button>
-                <button class="sub-btn" onclick="filterType('melody', this)">🎵 Melody</button>
-                <button class="sub-btn" onclick="filterType('action', this)">🎧 Action</button>
+                <button class="sub-btn active" onclick="showAllTypes(this)"> All</button>
+                <button class="sub-btn" onclick="filterType('romantic', this)"> Romantic</button>
+                <button class="sub-btn" onclick="filterType('melody', this)"> Melody</button>
+                <button class="sub-btn" onclick="filterType('action', this)"> Action</button>
             </div>
         </div>
     </section>
@@ -927,7 +927,7 @@ audio::-webkit-media-controls-volume-slider {
     <div class="music-list" id="musicList">
         <!-- TELUGU 1 -->
         <div class="song" data-language="telugu" data-type="melody">
-            <img src="dhima.jpeg" alt="Dheema Song cover">
+            <img src="poster/dhima.jpeg" alt="Dheema Song cover">
             <div class="song-info">
                 <h3>Dheema Song</h3>
                 <p>Telugu • Melody</p>
@@ -940,7 +940,7 @@ audio::-webkit-media-controls-volume-slider {
         </div>
         <!-- TELUGU 2 -->
         <div class="song" data-language="telugu" data-type="action">
-            <img src="surii.jpg" alt="Soorede cover">
+            <img src="poster/surii.jpg" alt="Soorede cover">
             <div class="song-info">
                 <h3>Soorede</h3>
                 <p>Telugu • Action</p>
@@ -953,7 +953,7 @@ audio::-webkit-media-controls-volume-slider {
         </div>
         <!-- TELUGU 3 -->
         <div class="song" data-language="telugu" data-type="romantic">
-            <img src="Rath.jpeg" alt="Ee Rathale cover">
+            <img src="poster/Rath.jpeg" alt="Ee Rathale cover">
             <div class="song-info">
                 <h3>Ee Rathale</h3>
                 <p>Telugu • Romantic</p>
@@ -966,7 +966,7 @@ audio::-webkit-media-controls-volume-slider {
         </div>
         <!-- HINDI -->
         <div class="song" data-language="hindi" data-type="romantic">
-            <img src="g.jpeg" alt="Gehra Hua cover">
+            <img src="poster/g.jpeg" alt="Gehra Hua cover">
             <div class="song-info">
                 <h3>Gehra Hua</h3>
                 <p>Hindi • Romantic</p>
@@ -979,7 +979,7 @@ audio::-webkit-media-controls-volume-slider {
         </div>
         <!-- MALAYALAM -->
         <div class="song" data-language="malayalam" data-type="romantic">
-            <img src="JJ.jpeg" alt="Minnalva cover">
+            <img src="poster/JJ.jpeg" alt="Minnalva cover">
             <div class="song-info">
                 <h3>Minnalva</h3>
                 <p>Malayalam • Romantic</p>
@@ -992,7 +992,7 @@ audio::-webkit-media-controls-volume-slider {
         </div>
         <!-- TAMIL -->
         <div class="song" data-language="tamil" data-type="melody">
-            <img src="Pava.jpeg" alt="Pavazha Malli cover">
+            <img src="poster/Pava.jpeg" alt="Pavazha Malli cover">
             <div class="song-info">
                 <h3>Pavazha Malli</h3>
                 <p>Tamil • Melody</p>
@@ -1005,7 +1005,7 @@ audio::-webkit-media-controls-volume-slider {
         </div>
         <!-- KANNADA -->
         <div class="song" data-language="kannada" data-type="romantic">
-            <img src="Meh.jpg" alt="Mehabooba cover">
+            <img src="poster/Meh.jpg" alt="Mehabooba cover">
             <div class="song-info">
                 <h3>Mehabooba</h3>
                 <p>Kannada • Romantic</p>
@@ -1016,6 +1016,57 @@ audio::-webkit-media-controls-volume-slider {
                 <a href="malayalam/Mehabooba BEATMATE.mp3" download class="download-btn">⬇ Download Song</a>
             </div>
         </div>
+        <div class="song" data-language="telugu" data-type="action">
+            <img src="poster/Sher.jpeg" alt="Aya Sher cover">
+            <div class="song-info">
+                <h3>Aya Sher</h3>
+                <p>Telugu • Action</p>
+            </div>
+            <button class="play-btn" onclick="playSong('song8', this)">▶</button>
+            <div class="audio-controls">
+                <audio id="song8" src="telugu/Aaya Sher BEATMATE.mp3" controls></audio>
+                <a href="telugu/Aaya Sher BEATMATE.mp3" download class="download-btn">⬇ Download Song</a>
+            </div>
+        </div>
+        <div class="song" data-language="telugu" data-type="melody">
+            <img src="poster/Nijame.jpeg" alt="Nijame cover">
+            <div class="song-info">
+                <h3>Nijamene Chebuthuna</h3>
+                <p>Telugu • Melody</p>
+            </div>
+            <button class="play-btn" onclick="playSong('song9', this)">▶</button>
+            <div class="audio-controls">
+                <audio id="song9" src="telugu/Nijame Ne BEATMATE.mp3" controls></audio>
+                <a href="telugu/Nijame Ne BEATMATE.mp3" download class="download-btn">⬇ Download Song</a>
+            </div>
+        </div>
+<div class="song" data-language="telugu" data-type="romantic">
+            <img src="poster/Chamiki.jpg" alt="Chamiki cover">
+            <div class="song-info">
+                <h3>Chamiki</h3>
+                <p>Telugu • Romantic</p>
+            </div>
+            <button class="play-btn" onclick="playSong('song10', this)">▶</button>
+            <div class="audio-controls">
+                <audio id="song10" src="telugu/Chamiki BEATMATE.mp3" controls></audio>
+                <a href="telugu/Chamiki BEATMATE.mp3" download class="download-btn">⬇ Download Song</a>
+            </div>
+        </div>
+
+    <div class="song" data-language="telugu" data-type="romantic">
+            <img src="poster/Chamiki.jpg" alt="Chini cover">
+            <div class="song-info">
+                <h3>Chini Gundelo</h3>
+                <p>Telugu • Romantic</p>
+            </div>
+            <button class="play-btn" onclick="playSong('song11', this)">▶</button>
+            <div class="audio-controls">
+                <audio id="song11" src="telugu/Chini gundelo BEATMATE.mp3" controls></audio>
+                <a href="telugu/Chini gundelo BEATMATE.mp3" download class="download-btn">⬇ Download Song</a>
+            </div>
+        </div>    
+        
+        
     </div>
 
     <!-- NO RESULTS -->
