@@ -4,25 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Primary SEO -->
     <title>BeatMate Music - Listen to Music Online</title>
+    <meta name="description" content="BeatMate Music is an online music platform to search, discover and listen to favourite songs across Hindi, Telugu, Tamil, Malayalam and Kannada music.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="BeatMate Music">
+    <meta name="application-name" content="BeatMate Music">
+    <meta name="theme-color" content="#0b0b0f">
 
-    <meta name="description"
-          content="BeatMate Music - Search, discover and listen to your favourite movie songs online in Hindi, Telugu, Tamil, Malayalam and Kannada.">
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://beatmatemusicc.onrender.com/">
 
-    <meta name="robots" content="index, follow">
-
-    <link rel="canonical"
-          href="https://beatmatemusicc.onrender.com/">
-
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/icon.png">
 
-    <!-- Google Site Name -->
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="BeatMate Music">
+    <meta property="og:title" content="BeatMate Music - Listen to Music Online">
+    <meta property="og:description" content="Search, discover and listen to favourite Hindi, Telugu, Tamil, Malayalam and Kannada songs on BeatMate Music.">
+    <meta property="og:url" content="https://beatmatemusicc.onrender.com/">
+    <meta property="og:image" content="https://beatmatemusicc.onrender.com/images/icon.png">
+    <meta property="og:image:alt" content="BeatMate Music">
+
+    <!-- Twitter / social sharing -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="BeatMate Music - Listen to Music Online">
+    <meta name="twitter:description" content="Search, discover and listen to music online with BeatMate Music.">
+    <meta name="twitter:image" content="https://beatmatemusicc.onrender.com/images/icon.png">
+
+    <!-- Google Site Name: the homepage is the correct place for WebSite structured data. -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "BeatMate Music",
-      "alternateName": "BEATMATE",
+      "alternateName": ["BEATMATE", "BeatMate"],
       "url": "https://beatmatemusicc.onrender.com/"
     }
     </script>
@@ -871,16 +888,17 @@ audio::-webkit-media-controls-volume-slider {
         </div>
     </nav>
 
+    <main id="main-content">
     <!-- ========== HEADER ========== -->
     <section class="music-header">
-        <h1> <span>Music</span> Collection</h1>
-        <p>Listen to your favourite movie songs</p>
+        <h1>🎵 <span>BeatMate</span> Music</h1>
+        <p>Search, discover and listen to your favourite Hindi, Telugu, Tamil, Malayalam and Kannada songs on BeatMate Music.</p>
     </section>
 
     <!-- ========== SEARCH ========== -->
     <div class="music-search">
-        <input type="text" id="songSearch" placeholder="🔍 Search songs...">
-        <button class="search-btn" onclick="searchSongs()">🔍 Search</button>
+        <input type="search" id="songSearch" aria-label="Search songs" placeholder="🔍 Search songs...">
+        <button class="search-btn" type="button" onclick="searchSongs()">🔍 Search</button>
     </div>
 
     <!-- ========== LANGUAGE + TYPE ========== -->
@@ -897,10 +915,10 @@ audio::-webkit-media-controls-volume-slider {
         <div class="subcategory">
             <h3>Browse by <span>Type</span></h3>
             <div class="subcategory-buttons">
-                <button class="sub-btn active" onclick="showAllTypes(this)"> All</button>
-                <button class="sub-btn" onclick="filterType('romantic', this)"> Romantic</button>
-                <button class="sub-btn" onclick="filterType('melody', this)"> Melody</button>
-                <button class="sub-btn" onclick="filterType('action', this)"> Action</button>
+                <button class="sub-btn active" onclick="showAllTypes(this)">🎶 All</button>
+                <button class="sub-btn" onclick="filterType('romantic', this)">❤️ Romantic</button>
+                <button class="sub-btn" onclick="filterType('melody', this)">🎵 Melody</button>
+                <button class="sub-btn" onclick="filterType('action', this)">🎧 Action</button>
             </div>
         </div>
     </section>
@@ -999,59 +1017,9 @@ audio::-webkit-media-controls-volume-slider {
             </div>
         </div>
     </div>
-    <div class="song" data-language="telugu" data-type="action">
-            <img src="Sher.jpeg" alt="Aya sher cover">
-            <div class="song-info">
-                <h3>Aya Sher</h3>
-                <p>Telugu • Action</p>
-            </div>
-            <button class="play-btn" onclick="playSong('song8', this)">▶</button>
-            <div class="audio-controls">
-                <audio id="song8" src="telugu/Aaya Sher BEATMATE.mp3" controls></audio>
-                <a href="telugu/Aaya Sher BEATMATE.mp3" download class="download-btn">⬇ Download Song</a>
-            </div>
-    </div>
-<div class="song" data-language="telugu" data-type="melody">
-            <img src="Nijame.jpeg" alt="Nijame cover">
-            <div class="song-info">
-                <h3>Nijamene Chebuthuna</h3>
-                <p>Telugu • Melody</p>
-            </div>
-            <button class="play-btn" onclick="playSong('song9', this)">▶</button>
-            <div class="audio-controls">
-                <audio id="song9" src="telugu/Nijame Ne BEATMATE.mp3" controls></audio>
-                <a href="telugu/Nijame Ne BEATMATE.mp3" download class="download-btn">⬇ Download Song</a>
-            </div>
-    </div>
-    <div class="song" data-language="telugu" data-type="romantic">
-            <img src="Chamiki.jpg" alt="Chamiki cover">
-            <div class="song-info">
-                <h3>Chamiki</h3>
-                <p>Telugu • Romantic</p>
-            </div>
-            <button class="play-btn" onclick="playSong('song10', this)">▶</button>
-            <div class="audio-controls">
-                <audio id="song10" src="telugu/Chamiki BEATMATE.mp3" controls></audio>
-                <a href="telugu/Chamiki BEATMATE.mp3" download class="download-btn">⬇ Download Song</a>
-            </div>
-    </div>
-    <div class="song" data-language="telugu" data-type="melody">
-            <img src="Chini.jpeg" alt="Chini gundelo cover">
-            <div class="song-info">
-                <h3>Chini Gundelo</h3>
-                <p>Telugu • Melody</p>
-            </div>
-            <button class="play-btn" onclick="playSong('song11', this)">▶</button>
-            <div class="audio-controls">
-                <audio id="song11" src="telugu/Chini gundelo BEATMATE.mp3" controls></audio>
-                <a href="telugu/Chini gundelo BEATMATE.mp3" download class="download-btn">⬇ Download Song</a>
-            </div>
-    </div>
-
-
 
     <!-- NO RESULTS -->
-    <div class="no-results" id="noResults"> No songs found</div>
+    <div class="no-results" id="noResults">😔 No songs found</div>
 
     <!-- PAGINATION -->
     <div class="pagination" id="paginationControls">
@@ -1078,8 +1046,10 @@ audio::-webkit-media-controls-volume-slider {
         </div>
     </section>
 
+    </main>
+
     <footer>
-        <p>© 2026 <strong>BEATMATE</strong> · TEAM ZEXII X LIONEL </p>
+        <p>© 2026 <strong>BEATMATE</strong> · Made By ZEXII </p>
     </footer>
 
     <!-- ============================================================
@@ -1088,7 +1058,7 @@ audio::-webkit-media-controls-volume-slider {
     <div class="now-playing-bar" id="nowPlayingBar">
         <!-- Left: song info -->
         <div class="left">
-            <img id="npCover" src="" alt="cover">
+            <img id="npCover" src="" alt="Currently playing song cover">
             <div class="info">
                 <div class="title" id="npTitle">Song</div>
                 <div class="artist" id="npArtist">Artist</div>
